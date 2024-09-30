@@ -1,0 +1,1 @@
+export const CREATE_NEW_USER = `INSERT INTO users`;
