@@ -1,73 +1,54 @@
-import { User } from '../models/user';
-import { Response, Request, request } from 'express';
+import { User } from "../models/user";
+import { Response, Request, request } from "express";
+import { CREATE_NEW_USER, SELECT_ALL_USERS } from "../db/userQuery";
+import { pool } from "../db/db_Conection";
 
-var testUsers: User[] = [
-  {
-    user_id: "1",
-    name: "test-1",
-    email: "test-1@gmail.com",
-    role: "admin",
-    created_date: new Date(),
-    updated_date: new Date(),
-    is_active: true,
-  },
-  {
-    user_id: "2",
-    name: "test-2",
-    email: "test-2@gmail.com",
-    role: "user",
-    created_date: new Date(),
-    updated_date: new Date(),
-    is_active: true,
-}
-];
 
-export const getAllUsers = (req: Request, res: Response) => {
-  res.status(200).json(testUsers);
-};
 
-export const createUser = (req: Request, res: Response) => {
-  const { user_id, name, email } = req.body;
-  console.log(user_id,name,email);
-  if (!user_id || !name || !email) {
-    console.log(
-      "Please complete the user information as follow user_id: string name: string email: string"
-    );
-    return res.status(400).json({msg:"Plesase complete the user information"})
+export const getAllUsers = async (req: Request, res: Response) => {
+  try{
+  pool.query(SELECT_ALL_USERS,(error, result)=>{
+    if(error){
+      console.log(error);
+      return res.status(500).json({msg:'Database error has occured'})
+    }
+    res.status(200).json(result.rows);
+  })
   }
-  const newUser: User = {
-    user_id: user_id,
-    name: name,
-    email: email,
-    role: "admin",
-    created_date: new Date(),
-    updated_date: new Date(),
-    is_active: true,
-  };
-
-  testUsers.push(newUser);
-  res.status(200).json({ msg: "User has been created" });
+  catch(error){
+    res.status(500).json({msg: "Sercer error"})
+  }
+  
 };
 
-export const updateUser = (req: Request, res: Response) =>{
-    const user_id = req.params.id;
-    if(!user_id){
-        return res.status(400).json({msg:`Plese enter the id`});
+export const createUser = async (req: Request, res: Response) => {
+  try {
+    const { name, email, password } = req.body;
+    console.log(name, email, password);
+    if (!name || !email || !password) {
+      console.log(
+        "Please complete the user information as follow user_id: string name: string email: string password: string"
+      );
+      return res
+        .status(400)
+        .json({ msg: "Plesase complete the user information" });
     }
-    const {name, email , role} = req.body;
-    if(!name || !email || !role){
-       return res.status(200).json({msg:`Change has not been made`});
-    }
-    const user: User | undefined = testUsers.find(user => user.user_id === user_id);
- 
-    if (!user) {
-        return res.status(404).json({ msg: `User with id ${user_id} not found` });
-    }
-   user.name = name;
-   user.email = email;
-   user.role = role;
-   user.updated_date = new Date();
+    const created_date = new Date();
+    const updated_date = created_date;
+    const role = "user";
+    const values = [name, email, password, role, created_date, updated_date];
+    pool.query(CREATE_NEW_USER, values, (error) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({msg: "Database error please check the console log" });
+      }
+      res.status(201).json({ msg: "User has been created" });
+    });
+  } catch (erro) {
+    res.status(500).json({ msg: "Server error occurred" });
+  }
+};
 
-   res.status(200).json({msg: `User Updated`});
+export const updateUser = (req: Request, res: Response) => {
 
-}
+};
