@@ -3,8 +3,11 @@ export type User = {
   name: string;
   email: string;
   password: string;
-  role: "user" | "admin";
+  role: 'user' | 'admin';
   created_date: Date;
   updated_date: Date;
   is_active: boolean;
 };
+
+export type UserInput = Pick<User, 'email' | 'name' | 'password'>;
+
