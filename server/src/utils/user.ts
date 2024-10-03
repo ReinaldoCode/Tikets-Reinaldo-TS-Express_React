@@ -1,6 +1,6 @@
 import { isUUID } from 'validator';
 import { NewUserInput, UpdatedUserInput, User } from '../models/user';
-import { updateUser } from '../controllers/user.controler';
+
 
 export const getNewUserData = (user: NewUserInput, first: number) => {
   const { name, email, password } = user;
@@ -16,7 +16,6 @@ export const getNewUserData = (user: NewUserInput, first: number) => {
   const values = [name, email, password, role, created_date, updated_date];
   return values;
 };
-
 export const validateID = (id: string) => {
   return isUUID(id);
 };
@@ -25,7 +24,6 @@ export const updateUserData = (
   user: User,
   id: string,
 ) => {
-  console.log(update);
   var {
     updatedName,
     updatedEmail,
@@ -35,17 +33,16 @@ export const updateUserData = (
   } = update;
   const { name, email, password, role, is_active } = user;
   updatedName == name || !updatedName ? (updatedName = name) : updatedName;
-  updatedEmail == email || !updatedEmail ? (updatedEmail = email) : updatedEmail;
-  updatedPassword ==
-    password || !updatedPassword
-      ? (updatedPassword = password)
-      : updatedPassword;
+  updatedEmail == email || !updatedEmail
+    ? (updatedEmail = email)
+    : updatedEmail;
+  updatedPassword == password || !updatedPassword
+    ? (updatedPassword = password)
+    : updatedPassword;
   updatedRole == role || !updatedRole ? (updatedRole = role) : updatedRole;
-  updatedIs_active ==
-    is_active || !updatedIs_active
-      ? (updatedIs_active = is_active)
-      : updatedIs_active;
-  console.log(updatedName);
+  updatedIs_active == is_active || !updatedIs_active
+    ? (updatedIs_active = is_active)
+    : updatedIs_active;
   const updated_date = new Date();
   const values = [
     updatedName,
@@ -56,6 +53,6 @@ export const updateUserData = (
     updatedIs_active,
     id,
   ];
-  console.log(values);
+
   return values;
 };

@@ -52,9 +52,7 @@ export const updateUser = async (req: Request, res: Response) => {
       return res.status(400).json({ msg: 'Wrong id format' });
     const { rowCount, rows } = await pool.query(GET_USER_BY_ID, [id]);
     if (rowCount === 0) return res.status(404).json({ msg: 'User not found' });
-
     const values = updateUserData(req.body, rows[0], id);
-    
     await pool.query<User>(UPDATE_USER_BY_ID, values);
     res.status(200).json({ msg: 'User updated' });
   } catch (error) {
