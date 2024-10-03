@@ -9,5 +9,11 @@ export type User = {
   is_active: boolean;
 };
 
-export type UserInput = Pick<User, 'email' | 'name' | 'password'>;
-
+export type NewUserInput = Pick<User, 'email' | 'name' | 'password'>;
+export type UpdatedUserInput = {
+  updatedName: string;
+  updatedEmail: string;
+  updatedPassword: string;
+  updatedRole: 'user' | 'admin';
+  updatedIs_active: boolean;
+};

@@ -1,5 +1,5 @@
 {
-    "user_id":"1",
     "name":"Test-1",
-    "email":"test-1@gmail.com"
+    "email":"test-1@gmail.com",
+    "password":"123"
 }
