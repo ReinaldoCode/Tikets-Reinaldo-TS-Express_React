@@ -3,3 +3,11 @@
     "email":"test-1@gmail.com",
     "password":"123"
 }
+
+{
+    "updatedName":"Test-1",
+    "updatedEmail":"test-1@gmail.com",
+    "updatedPassword":"123"
+    "updatedRole":"user"
+    "updatedIs_active": true
+}

@@ -35,7 +35,7 @@ export const getUserById = async (req: Request, res: Response) => {
 export const createUser = async (req: Request, res: Response) => {
   try {
     const { rows } = await pool.query<User>(SELECT_ALL_USERS);
-    const values = getNewUserData(req.body, rows.length);
+    const values = await getNewUserData(req.body, rows.length);
     if (values) {
       await pool.query<User>(CREATE_NEW_USER, values);
       res.status(201).json({ msg: 'User has been created' });
