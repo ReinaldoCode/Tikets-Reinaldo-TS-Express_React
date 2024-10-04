@@ -7,7 +7,10 @@
 {
     "updatedName":"Test-1",
     "updatedEmail":"test-1@gmail.com",
-    "updatedPassword":"123"
-    "updatedRole":"user"
+    "updatedPassword":"123",
+    "updatedRole":"user",
     "updatedIs_active": true
 }
+
+$2a$10$AeDM7a9K.4.XxVnw7VZTKuAXUQsSpECi82SPlT2OExboOfuv5TO3K
+$2a$10$AeDM7a9K.4.XxVnw7VZTKuAXUQsSpECi82SPlT2OExboOfuv5TO3K

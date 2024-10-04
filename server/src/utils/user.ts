@@ -1,11 +1,10 @@
 import { isUUID } from 'validator';
 import { NewUserInput, UpdatedUserInput, User } from '../models/user';
-import { hassingPassword } from './password';
-
+import { hassingPassword, validPassword } from './password';
 
 export const getNewUserData = async (user: NewUserInput, first: number) => {
   const { name, email, password } = user;
-  const hased = await hassingPassword(password)
+  const hased = await hassingPassword(password);
   if (!name || !email || !password) {
     throw Error(
       'Please complete the user information as follow user_id: string name: string email: string password: string',
@@ -22,7 +21,7 @@ export const getNewUserData = async (user: NewUserInput, first: number) => {
 export const validateID = (id: string) => {
   return isUUID(id);
 };
-export const updateUserData = (
+export const updateUserData = async (
   update: UpdatedUserInput,
   user: User,
   id: string,
@@ -35,13 +34,17 @@ export const updateUserData = (
     updatedIs_active,
   } = update;
   const { name, email, password, role, is_active } = user;
+  console.log(password);
+  const valid = await validPassword(updatedPassword, password);
+  const hassed = await hassingPassword(updatedPassword);
+  console.log(hassed, valid);
   updatedName == name || !updatedName ? (updatedName = name) : updatedName;
   updatedEmail == email || !updatedEmail
     ? (updatedEmail = email)
     : updatedEmail;
-  updatedPassword == password || !updatedPassword
+  valid || !updatedPassword
     ? (updatedPassword = password)
-    : updatedPassword;
+    : (updatedPassword = hassed);
   updatedRole == role || !updatedRole ? (updatedRole = role) : updatedRole;
   updatedIs_active == is_active || !updatedIs_active
     ? (updatedIs_active = is_active)
