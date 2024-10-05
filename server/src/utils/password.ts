@@ -7,7 +7,6 @@ return hassedPassword;
 
 }
 export const validPassword = async (updatedPassword:string ,password:string) =>{
-    console.log(password,updatedPassword);
     const valid = await bcrypt.compare(updatedPassword, password)
     return valid;
 }

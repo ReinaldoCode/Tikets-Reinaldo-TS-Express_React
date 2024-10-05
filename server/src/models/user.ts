@@ -10,6 +10,7 @@ export type User = {
 };
 
 export type NewUserInput = Pick<User, 'email' | 'name' | 'password'>;
+
 export type UpdatedUserInput = {
   updatedName: string;
   updatedEmail: string;
