@@ -35,11 +35,12 @@ export const getUserById = async (req: Request, res: Response) => {
 export const createUser = async (req: Request, res: Response) => {
   try {
     const { rows } = await pool.query<User>(SELECT_ALL_USERS);
-    const values = await getNewUserData(req.body, rows.length);
-    if (values) {
-      await pool.query<User>(CREATE_NEW_USER, values);
-      res.status(201).json({ msg: 'User has been created' });
-    }
+    const {name,email,password} = req.body
+    if (!name || !email || !password)
+      return res.status(400).json({msg: 'Invalid data'})
+    const values = await getNewUserData(name, email, password , rows.length);
+    await pool.query<User>(CREATE_NEW_USER, values);
+    res.status(201).json({ msg: 'User has been created' });
   } catch (error) {
     res.status(400).json(error);
   }
@@ -49,7 +50,7 @@ export const updateUser = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
     if (!validateID(id))
-      return res.status(400).json({ msg: 'Wrong id format' });
+    return res.status(400).json({ msg: 'Wrong id format' });
     const { rowCount, rows } = await pool.query(GET_USER_BY_ID, [id]);
     if (rowCount === 0) return res.status(404).json({ msg: 'User not found' });
     const values = await updateUserData(req.body, rows[0], id);

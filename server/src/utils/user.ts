@@ -1,16 +1,11 @@
 import { isUUID } from 'validator';
-import { NewUserInput, UpdatedUserInput, User } from '../models/user';
-import { hassingPassword, validPassword } from './password';
+import { UpdatedUserInput, User } from '../models/user';
+import { hashPassword, validPassword } from './password';
 
-export const getNewUserData = async (user: NewUserInput, first: number) => {
+
+export const getNewUserData = async (name:string, email:string, password:string,  first: number) => {
   try {
-    const { name, email, password } = user;
-    const hased = await hassingPassword(password);
-    if (!name || !email || !password)
-      throw new Error(
-        'Please complete the user information as follow user_id: string name: string email: string password: string',
-      );
-
+    const hased = await hashPassword(password);
     const created_date = new Date();
     const updated_date = created_date;
     var role = '';
@@ -38,7 +33,7 @@ export const updateUserData = async (
   } = update;
   const { name, email, password, role, is_active } = user;
   const valid = await validPassword(updatedPassword, password);
-  const hassed = await hassingPassword(updatedPassword);
+  const hassed = await hashPassword(updatedPassword);
   const updated_date = new Date();
   const values = [
     updatedName == name || !updatedName ? name : updatedName,
