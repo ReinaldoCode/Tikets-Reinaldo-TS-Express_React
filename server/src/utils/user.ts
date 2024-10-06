@@ -4,7 +4,6 @@ import { hashPassword, validPassword } from './password';
 
 
 export const getNewUserData = async (name:string, email:string, password:string,  first: number) => {
-  try {
     const hased = await hashPassword(password);
     const created_date = new Date();
     const updated_date = created_date;
@@ -12,9 +11,6 @@ export const getNewUserData = async (name:string, email:string, password:string,
     first === 0 ? (role = 'admin') : (role = 'user');
     const values = [name, email, hased, role, created_date, updated_date];
     return values;
-  } catch (error) {
-    throw error;
-  }
 };
 export const validateID = (id: string) => {
   return isUUID(id);
@@ -46,6 +42,5 @@ export const updateUserData = async (
       : updatedIs_active,
     id,
   ];
-
   return values;
 };
