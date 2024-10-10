@@ -17,6 +17,7 @@
     "brand":"HP",
     "model":"1010",
     "serial_number":"test-1",
+    "purchase_date":"10/8/2025",
     "price":"10.5",
     "status":"IN USE",
     "user_id":"test",

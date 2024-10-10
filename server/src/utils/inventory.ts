@@ -7,6 +7,7 @@ export const getItenData = (item: Inventory) => {
     brand,
     model,
     serial_number,
+    purchase_date,
     price,
     status,
     user_id,
@@ -15,7 +16,6 @@ export const getItenData = (item: Inventory) => {
     warranty_expiry,
     condition,
   } = item;
-  const purchase_date = new Date();
   if (
     !equipment_type ||
     !brand ||

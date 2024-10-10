@@ -1,4 +1,3 @@
-import { isUUID } from 'validator';
 import { UpdatedUserInput, User } from '../models/user';
 import { hashPassword, validPassword } from './password';
 
@@ -12,9 +11,7 @@ export const getNewUserData = async (name:string, email:string, password:string,
     const values = [name, email, hased, role, created_date, updated_date];
     return values;
 };
-export const validateID = (id: string) => {
-  return isUUID(id);
-};
+
 export const updateUserData = async (
   update: UpdatedUserInput,
   user: User,

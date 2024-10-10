@@ -7,7 +7,7 @@ import {
   UPDATE_USER_BY_ID,
 } from '../db/queries';
 import { pool } from '../db';
-import { getNewUserData, updateUserData, validateID } from '../utils/user';
+import { findById, getNewUserData, updateUserData, validateID } from '../utils';
 import { User } from '../models/user';
 import { BadRequestError, NotFoundError } from '../Error/custom.error';
 
@@ -24,9 +24,9 @@ export const getUserById = async (req: Request, res: Response, next: NextFunctio
   try {
     const id = req.params.id;
     if (!validateID(id))
-      throw new BadRequestError('Wrong format id')
+      throw new BadRequestError('Wrong ID format')
     const { rowCount, rows } = await pool.query<User>(GET_USER_BY_ID, [id]);
-    if (rowCount === 0) throw new NotFoundError(`No user with Id ${id}`)
+    if (!findById(rowCount)) throw new NotFoundError(`No user with id${id}`);
     res.status(200).json(rows);
   } catch (error) {
     next (error)
@@ -51,9 +51,9 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
   try {
     const id = req.params.id;
     if (!validateID(id))
-      throw new BadRequestError('Wrong format id')
+      throw new BadRequestError('Wrong ID format')
     const { rowCount, rows } = await pool.query<User>(GET_USER_BY_ID, [id]);
-    if (rowCount === 0) throw new NotFoundError(`No user with Id ${id}`)
+    if (!findById(rowCount)) throw new NotFoundError(`No user with Id ${id}`)
     const values = await updateUserData(req.body, rows[0], id);
     await pool.query<User>(UPDATE_USER_BY_ID, values);
     res.status(200).json({ msg: 'User updated' });
@@ -66,9 +66,9 @@ export const deleteUser = async (req: Request, res: Response, next: NextFunction
   try {
     const id = req.params.id;
     if (!validateID(id))
-      throw new BadRequestError('Wrong format id')
+      throw new BadRequestError('Wrong ID format')
     const { rowCount } = await pool.query<User>(DELETE_USER_BY_ID, [id]);
-    if (rowCount === 0) throw new NotFoundError(`No user with Id ${id}`)
+    if (!findById(rowCount)) throw new NotFoundError(`No user with Id ${id}`)
     res.status(200).json({ msg: 'User deleted' });
   } catch (error) {
     next(error)

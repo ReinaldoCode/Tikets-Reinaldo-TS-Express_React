@@ -7,7 +7,7 @@ export type Inventory = {
   brand: string;                
   model: string;                
   serial_number: string;       
-  purchase_date: Date;        
+  purchase_date: string;        
   price: number;                
   status: Status  
   user_id: string,

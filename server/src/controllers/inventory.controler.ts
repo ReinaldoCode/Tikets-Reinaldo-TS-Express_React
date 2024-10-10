@@ -4,10 +4,11 @@ import {
   CREATE_NEW_ITEM,
   SELECT_ALL_INVENTORY,
   SELECT_ITEM_BY_ID,
+  SELECT_ITEM_BY_STATUS,
+  SELECT_ITEM_BY_USER_ID,
 } from '../db/queries';
-import { getItenData } from '../utils/inventory';
 import { Inventory } from '../models/inventory';
-import { validateID } from '../utils/user';
+import { validateID, getItenData, findById } from '../utils';
 import { BadRequestError, NotFoundError } from '../Error/custom.error';
 
 export const getAllInventory = async (
@@ -33,7 +34,26 @@ export const getItemByID = async (
     const { rowCount, rows } = await pool.query<Inventory>(SELECT_ITEM_BY_ID, [
       id,
     ]);
-    if(rowCount === 0 )throw new NotFoundError(`No item with id${id}`)
+    if (!findById(rowCount)) throw new NotFoundError(`No item with id ${id}`);
+    res.status(200).json(rows);
+  } catch (error) {
+    next(error);
+  }
+};
+export const getItemByUserID = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+    if (!validateID(id)) throw new BadRequestError('Wrong ID format');
+    const { rowCount, rows } = await pool.query<Inventory>(
+      SELECT_ITEM_BY_USER_ID,
+      [id],
+    );
+    if (!findById(rowCount))
+      throw new NotFoundError(`No item with user id ${id}`);
     res.status(200).json(rows);
   } catch (error) {
     next(error);
@@ -52,3 +72,5 @@ export const createNewItem = async (
     next(error);
   }
 };
+export const updateItemByID = async () => {};
+export const deleteItemByID = async () => {};
