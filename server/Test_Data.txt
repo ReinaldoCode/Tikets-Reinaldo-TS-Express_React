@@ -12,5 +12,16 @@
     "updatedIs_active": "true"
 }
 
-$2a$10$AeDM7a9K.4.XxVnw7VZTKuAXUQsSpECi82SPlT2OExboOfuv5TO3K
-$2a$10$AeDM7a9K.4.XxVnw7VZTKuAXUQsSpECi82SPlT2OExboOfuv5TO3K
+{
+    "equipment_type":"Monitor",
+    "brand":"HP",
+    "model":"1010",
+    "serial_number":"test-1",
+    "price":"10.5",
+    "status":"IN USE",
+    "user_id":"test",
+    "assigned_to":"test-1",
+    "location":"test-1",
+    "warranty_expiry":"10/8/2025",
+    "condition":"GOOD"
+}

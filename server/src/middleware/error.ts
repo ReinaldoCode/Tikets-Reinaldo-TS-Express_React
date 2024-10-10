@@ -8,7 +8,6 @@ export const errorHandlerMiddleware = (
   res: Response,
   next: NextFunction,
 ) => {
-  console.log(err);
   const statusCode  = err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
   const msg = err.message || 'something went wrong, try again';
   res.status(statusCode).json({msg});

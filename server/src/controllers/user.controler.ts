@@ -11,12 +11,12 @@ import { getNewUserData, updateUserData, validateID } from '../utils/user';
 import { User } from '../models/user';
 import { BadRequestError, NotFoundError } from '../Error/custom.error';
 
-export const getAllUsers = async (req: Request, res: Response) => {
+export const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { rows } = await pool.query<User>(SELECT_ALL_USERS);
     res.status(200).json(rows);
   } catch (error) {
-    res.status(500).json({ msg: 'Server error' });
+    next(error)
   }
 };
 
@@ -25,7 +25,7 @@ export const getUserById = async (req: Request, res: Response, next: NextFunctio
     const id = req.params.id;
     if (!validateID(id))
       throw new BadRequestError('Wrong format id')
-    const { rowCount, rows } = await pool.query(GET_USER_BY_ID, [id]);
+    const { rowCount, rows } = await pool.query<User>(GET_USER_BY_ID, [id]);
     if (rowCount === 0) throw new NotFoundError(`No user with Id ${id}`)
     res.status(200).json(rows);
   } catch (error) {
@@ -52,7 +52,7 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
     const id = req.params.id;
     if (!validateID(id))
       throw new BadRequestError('Wrong format id')
-    const { rowCount, rows } = await pool.query(GET_USER_BY_ID, [id]);
+    const { rowCount, rows } = await pool.query<User>(GET_USER_BY_ID, [id]);
     if (rowCount === 0) throw new NotFoundError(`No user with Id ${id}`)
     const values = await updateUserData(req.body, rows[0], id);
     await pool.query<User>(UPDATE_USER_BY_ID, values);
