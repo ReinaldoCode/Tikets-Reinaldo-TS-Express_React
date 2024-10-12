@@ -26,7 +26,7 @@ export const getUserById = async (req: Request, res: Response, next: NextFunctio
     if (!validateID(id))
       throw new BadRequestError('Wrong ID format')
     const { rowCount, rows } = await pool.query<User>(GET_USER_BY_ID, [id]);
-    if (!findById(rowCount)) throw new NotFoundError(`No user with id${id}`);
+    if (!findById(rowCount)) throw new NotFoundError(`No user with ID ${id}`);
     res.status(200).json(rows);
   } catch (error) {
     next (error)
@@ -53,7 +53,7 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
     if (!validateID(id))
       throw new BadRequestError('Wrong ID format')
     const { rowCount, rows } = await pool.query<User>(GET_USER_BY_ID, [id]);
-    if (!findById(rowCount)) throw new NotFoundError(`No user with Id ${id}`)
+    if (!findById(rowCount)) throw new NotFoundError(`No user with ID ${id}`)
     const values = await updateUserData(req.body, rows[0], id);
     await pool.query<User>(UPDATE_USER_BY_ID, values);
     res.status(200).json({ msg: 'User updated' });
@@ -68,7 +68,7 @@ export const deleteUser = async (req: Request, res: Response, next: NextFunction
     if (!validateID(id))
       throw new BadRequestError('Wrong ID format')
     const { rowCount } = await pool.query<User>(DELETE_USER_BY_ID, [id]);
-    if (!findById(rowCount)) throw new NotFoundError(`No user with Id ${id}`)
+    if (!findById(rowCount)) throw new NotFoundError(`No user with ID ${id}`)
     res.status(200).json({ msg: 'User deleted' });
   } catch (error) {
     next(error)

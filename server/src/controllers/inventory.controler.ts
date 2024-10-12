@@ -69,7 +69,7 @@ export const createNewItem = async (
 ) => {
   try {
     await pool.query<Inventory>(CREATE_NEW_ITEM, getItemData(req.body));
-    res.status(200).json({ msg: 'Item Created' });
+    res.status(201).json({ msg: 'Item Created' });
   } catch (error) {
     next(error);
   }
