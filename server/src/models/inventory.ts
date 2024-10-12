@@ -16,3 +16,10 @@ export type Inventory = {
   warranty_expiry: string;      
   condition: Condition;  
 };
+
+export type UpdateInverntory = {
+  updatedStatus: Status,
+  updatedAssigned_to: string,
+  updatedLocation: string,
+  updatedCondition: Condition
+};

@@ -26,3 +26,9 @@
     "warranty_expiry":"10/8/2025",
     "condition":"GOOD"
 }
+{
+  "updatedStatus": "IN STORAGE",
+  "updatedAssigned_to": "update- test",
+  "updatedLocation": "update-test",
+  "updatedCondition": "FAIR"
+}

@@ -1,7 +1,7 @@
-import { Inventory } from '../models/inventory';
+import { Inventory, UpdateInverntory } from '../models/inventory';
 import { BadRequestError } from '../Error/custom.error';
 
-export const getItenData = (item: Inventory) => {
+export const getItemData = (item: Inventory) => {
   const {
     equipment_type,
     brand,
@@ -46,4 +46,27 @@ export const getItenData = (item: Inventory) => {
     condition,
   ];
   return value;
+};
+
+export const getUpdateItemData = (
+  update: UpdateInverntory,
+  item: Inventory,
+  id: string,
+) => {
+  const {
+    updatedStatus,
+    updatedAssigned_to,
+    updatedLocation,
+    updatedCondition,
+  } = update;
+
+  const { status, assigned_to, location, condition } = item;
+  const values = [
+    updatedStatus === status || !updatedStatus ? status : updatedStatus,
+    updatedAssigned_to === assigned_to || !updatedAssigned_to ? assigned_to : updatedAssigned_to,
+    updatedLocation === location || !updatedLocation ? location : updatedLocation,
+    updatedCondition ===condition || !updatedCondition ?condition : updatedCondition,
+    id,
+  ]
+  return values;
 };
