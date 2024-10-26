@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.aside`
+export const Wrapper = styled.aside`
   @media (min-width: 992px) {
     display: none;
   }
@@ -15,6 +15,7 @@ const Wrapper = styled.aside`
     opacity: 0;
     transition: var(--transition);
     visibility: hidden;
+    
   }
   .show-sidebar {
     z-index: 99;
@@ -68,4 +69,4 @@ const Wrapper = styled.aside`
     color: var(--primary-500);
   }
 `;
-export default Wrapper;
+

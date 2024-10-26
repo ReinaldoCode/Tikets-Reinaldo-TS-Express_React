@@ -11,7 +11,7 @@ import {
 } from '../db/queries';
 import { Inventory } from '../models/inventory';
 import { validateID, getItemData, findById, getUpdateItemData } from '../utils';
-import { BadRequestError, NotFoundError } from '../Error/custom.error';
+import { BadRequestError, NotFoundError } from '../error/custom.error';
 
 export const getAllInventory = async (
   req: Request,
@@ -74,16 +74,32 @@ export const createNewItem = async (
     next(error);
   }
 };
-export const updateItemByID = async (req: Request, res: Response, next: NextFunction) => {
-  try{
-    const {id} = req.params;
-    if(!validateID(id))throw new BadRequestError('Wrong ID format');
-    const {rowCount,rows} = await pool.query<Inventory>(SELECT_ITEM_BY_ID,[id]);
-    if(!findById(rowCount)) throw new NotFoundError(`No item with user id ${id}`);
-    const values = getUpdateItemData(req.body,rows[0],id)
-    await pool.query<Inventory>(UPDATE_ITEM_BY_ID, values );
-    res.status(200).json({msg:"Item has been updated"});
-  }catch(error){
+export const updateItemByID = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+
+    if (!validateID(id)) {
+      throw new BadRequestError('Wrong ID format');
+    }
+
+    const { rowCount, rows } = await pool.query<Inventory>(SELECT_ITEM_BY_ID, [
+      id,
+    ]);
+
+    if (!findById(rowCount)) {
+      throw new NotFoundError(`No item with user id ${id}`);
+    }
+
+    const values = getUpdateItemData(req.body, rows[0], id);
+
+    await pool.query<Inventory>(UPDATE_ITEM_BY_ID, values);
+    
+    res.status(200).json({ msg: 'Item has been updated' });
+  } catch (error) {
     next(error);
   }
 };

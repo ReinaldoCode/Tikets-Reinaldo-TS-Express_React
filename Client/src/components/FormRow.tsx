@@ -1,4 +1,4 @@
-import { Row } from '../Types';
+import { Row } from '../types';
 export const FormRow: React.FC<Row> = ({
   type,
   name,

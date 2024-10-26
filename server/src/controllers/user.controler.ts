@@ -9,7 +9,7 @@ import {
 import { pool } from '../db';
 import { findById, getNewUserData, updateUserData, validateID } from '../utils';
 import { User } from '../models/user';
-import { BadRequestError, NotFoundError } from '../Error/custom.error';
+import { BadRequestError, NotFoundError } from '../error/custom.error';
 
 export const getAllUsers = async (
   req: Request,

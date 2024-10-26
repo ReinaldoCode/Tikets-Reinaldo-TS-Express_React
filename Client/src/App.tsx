@@ -11,7 +11,7 @@ import {
   AllItems,
   Profile,
   Admin
-} from './Pages';
+} from './pages';
 
 const router = createBrowserRouter([
   {

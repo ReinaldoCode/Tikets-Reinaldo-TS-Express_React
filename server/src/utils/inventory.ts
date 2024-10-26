@@ -1,5 +1,5 @@
 import { Inventory, UpdateInverntory } from '../models/inventory';
-import { BadRequestError } from '../Error/custom.error';
+import { BadRequestError } from '../error/custom.error';
 
 export const getItemData = (item: Inventory) => {
   const {

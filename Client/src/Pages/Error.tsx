@@ -1,7 +1,7 @@
 import { useRouteError, Link } from 'react-router-dom';
 import Wrapper from '../wrappers/ErrorPage';
 import img from '../assets/error.svg';
-import { RouteError } from '../Types';
+import { RouteError } from '../types';
 
 export const Error: React.FC = () => {
   const error = useRouteError() as RouteError;
