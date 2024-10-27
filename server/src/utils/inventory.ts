@@ -15,6 +15,7 @@ export const getItemData = (item: Inventory) => {
     location,
     warranty_expiry,
     condition,
+    buy_from,
   } = item;
   if (
     !equipment_type ||
@@ -28,7 +29,8 @@ export const getItemData = (item: Inventory) => {
     !assigned_to ||
     !location ||
     !warranty_expiry ||
-    !condition
+    !condition ||
+    !buy_from
   )
     throw new BadRequestError('Information missing');
   const value = [
@@ -44,6 +46,7 @@ export const getItemData = (item: Inventory) => {
     location,
     warranty_expiry,
     condition,
+    buy_from,
   ];
   return value;
 };

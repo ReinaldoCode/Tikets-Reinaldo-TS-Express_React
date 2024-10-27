@@ -20,11 +20,11 @@
     "purchase_date":"10/8/2025",
     "price":"10.5",
     "status":"IN USE",
-    "user_id":"test",
     "assigned_to":"test-1",
     "location":"test-1",
     "warranty_expiry":"10/8/2025",
-    "condition":"GOOD"
+    "condition":"GOOD",
+    "buy_from": "BestBuy"
 }
 {
   "updatedStatus": "IN STORAGE",
