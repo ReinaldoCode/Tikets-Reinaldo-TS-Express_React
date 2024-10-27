@@ -10,8 +10,16 @@ import {
   Stats,
   AllItems,
   Profile,
-  Admin
+  Admin,
 } from './pages';
+
+export const checkDefaultTheme = () => {
+  const isDarkTheme = localStorage.getItem('darkTheme') === 'true';
+  document.body.classList.toggle('dark-theme', isDarkTheme);
+  return isDarkTheme.toString();
+};
+
+checkDefaultTheme();
 
 const router = createBrowserRouter([
   {
@@ -30,28 +38,28 @@ const router = createBrowserRouter([
       {
         path: '/dashboard',
         element: <DashboardLayout />,
-        children:[
+        children: [
           {
-            index:true,
-            element:<AddItems/>
+            index: true,
+            element: <AddItems />,
           },
           {
             path: 'stats',
-            element:<Stats/>
+            element: <Stats />,
           },
           {
             path: 'all-items',
-            element:<AllItems/>
+            element: <AllItems />,
           },
           {
             path: 'profile',
-            element:<Profile/>
+            element: <Profile />,
           },
           {
             path: 'admin',
-            element:<Admin/>
+            element: <Admin />,
           },
-        ]
+        ],
       },
     ],
   },

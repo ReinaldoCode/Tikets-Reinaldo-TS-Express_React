@@ -13,7 +13,7 @@ export const links : LinkType [] = [
     },
     {
         text: 'all item',
-        path:'all-items',
+        path: 'all-items',
         icon: <MdQueryStats/>, 
     },
     {

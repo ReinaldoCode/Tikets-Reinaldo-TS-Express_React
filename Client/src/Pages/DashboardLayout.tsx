@@ -3,6 +3,7 @@ import Wrapper from '../wrappers/Dashboard';
 import { BigSidebar, Navbar, SmallSidebar } from '../components';
 import { createContext, useContext, useState } from 'react';
 import { DashboardContextProps } from '../types';
+import { checkDefaultTheme } from '../App';
 
 const DashboardContext = createContext<DashboardContextProps>(
   {} as DashboardContextProps
@@ -11,7 +12,7 @@ const DashboardContext = createContext<DashboardContextProps>(
 export const DashboardLayout: React.FC = () => {
   const user = { name: 'Reinaldo' };
   const [showSidebar, setShowSidebar] = useState(false);
-  const [isDarkTheme, setIsDarkTheme] = useState('false');
+  const [isDarkTheme, setIsDarkTheme] = useState(checkDefaultTheme);
 
   const toggleDarkTheme = () => {
     var newDarkTheme = isDarkTheme;
