@@ -11,13 +11,15 @@ import {
 import { Inventory } from '../models/inventory';
 import { validateID, getItemData, findById, getUpdateItemData } from '../utils';
 import { BadRequestError, NotFoundError } from '../error/custom.error';
+import { AuthenticatedRequest, User } from '../models/user';
 
 export const getAllInventory = async (
-  req: Request,
+  req: AuthenticatedRequest,
   res: Response,
   next: NextFunction,
 ) => {
   try {
+    console.log(req.user?.user_id)
     const { rows } = await pool.query<Inventory>(SELECT_ALL_INVENTORY);
     res.status(200).json(rows);
   } catch (error) {
@@ -25,7 +27,7 @@ export const getAllInventory = async (
   }
 };
 export const getItemByID = async (
-  req: Request,
+  req: AuthenticatedRequest,
   res: Response,
   next: NextFunction,
 ) => {
@@ -42,7 +44,7 @@ export const getItemByID = async (
   }
 };
 export const getItemByUserID = async (
-  req: Request,
+  req: AuthenticatedRequest,
   res: Response,
   next: NextFunction,
 ) => {
@@ -62,7 +64,7 @@ export const getItemByUserID = async (
 };
 
 export const createNewItem = async (
-  req: Request,
+  req: AuthenticatedRequest,
   res: Response,
   next: NextFunction,
 ) => {
@@ -74,7 +76,7 @@ export const createNewItem = async (
   }
 };
 export const updateItemByID = async (
-  req: Request,
+  req: AuthenticatedRequest,
   res: Response,
   next: NextFunction,
 ) => {
@@ -104,7 +106,7 @@ export const updateItemByID = async (
 };
 
 export const deleteItemByID = async (
-  req: Request,
+  req: AuthenticatedRequest,
   res: Response,
   next: NextFunction,
 ) => {

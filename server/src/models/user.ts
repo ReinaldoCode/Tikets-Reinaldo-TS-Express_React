@@ -1,3 +1,4 @@
+import { Request } from "express";
 export type User = {
   user_id: string;
   name: string;
@@ -16,3 +17,10 @@ export type UpdatedUserInput = {
   updatedRole: 'user' | 'admin';
   updatedIs_active: boolean;
 };
+
+export type AuthenticatedRequest = Request &{
+  user?: {
+    user_id: string;
+    role: string;
+  };
+}

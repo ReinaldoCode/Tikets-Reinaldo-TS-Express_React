@@ -10,7 +10,7 @@ const DashboardContext = createContext<DashboardContextProps>(
 );
 
 export const DashboardLayout: React.FC = () => {
-  const user = { name: 'Reinaldo' };
+  const user = { name: '' };
   const [showSidebar, setShowSidebar] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(checkDefaultTheme);
 

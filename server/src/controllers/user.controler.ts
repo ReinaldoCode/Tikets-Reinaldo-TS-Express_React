@@ -5,11 +5,19 @@ import {
   DELETE_USER_BY_ID,
   GET_USER_BY_ID,
   UPDATE_USER_BY_ID,
+  Login,
 } from '../db/queries';
 import { pool } from '../db';
-import { findById, getNewUserData, updateUserData, validateID } from '../utils';
+import {
+  findById,
+  getNewUserData,
+  updateUserData,
+  validateID,
+  validPassword,
+} from '../utils';
 import { User } from '../models/user';
 import { BadRequestError, NotFoundError } from '../error/custom.error';
+import { createJWT } from '../utils/token';
 
 export const getAllUsers = async (
   req: Request,
@@ -90,3 +98,28 @@ export const deleteUser = async (
     next(error);
   }
 };
+export const login = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { email, password } = req.body;
+    const { rowCount, rows } = await pool.query<User>(Login, [email]);
+    if (!findById(rowCount)) throw new NotFoundError(`Wrong user name`);
+    const valid = await validPassword(password, rows[0].password);
+    if (!valid) throw new BadRequestError('Wrong Password');
+    const user = rows[0];
+    const token = createJWT({ user_id: user.user_id, role: user.role });
+    const oneDay = 1000 * 60 * 60 * 24;
+    res.cookie('token', token, {
+      httpOnly: true,
+      expires: new Date(Date.now() + oneDay),
+    });
+    res.status(200).json({ msg: 'User loggen in' });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const logout = async () => {};

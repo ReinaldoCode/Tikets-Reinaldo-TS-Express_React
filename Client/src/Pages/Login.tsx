@@ -1,13 +1,53 @@
-import { FormRow } from '../components'
+import { ActionFunction, Form, redirect, useNavigation } from 'react-router-dom';
+import { FormRow } from '../components';
 import Wrapper from '../wrappers/LoginPage';
+import React from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+
+
+export const action: ActionFunction = async ({ request }) => {
+  const fromData = await request.formData();
+  const data = Object.fromEntries(fromData) as {
+    email: string;
+    password: string;
+  };
+  try {
+    const response = await axios.post('/api/v1/user/login', data);
+    const token = response.data.token;
+    if (!token) throw new Error('Token not found');
+    localStorage.setItem('jwtToken', token);
+    toast.success('Login successful')
+    return redirect('/dashboard');
+  } catch (error: any) {
+  toast.error(error.response.data.msg)
+   return (error)
+  }
+};
 
 export const Login: React.FC = () => {
-  return <Wrapper>
-    <form className='form'>
-      <h4>Login</h4>
-      <FormRow type='email' name='email' lableText='email' defaultValue='test@gmail.com'/>
-      <FormRow type='password' name='password' lableText='password' defaultValue='1234'/>
-      <button type='submit' className='btn btn-block'>Submit</button>
-    </form>
-  </Wrapper>;
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === 'submitting';
+  return (
+    <Wrapper>
+      <Form className="form" method='post'>
+        <h4>Login</h4>
+        <FormRow
+          type="email"
+          name="email"
+          lableText="email"
+          defaultValue="test-2@gmail.com"
+        />
+        <FormRow
+          type="password"
+          name="password"
+          lableText="password"
+          defaultValue="123"
+        />
+        <button type="submit" className="btn btn-block" disabled={isSubmitting}>
+        {isSubmitting ? "Submitting..." : "Submit"}
+        </button>
+      </Form>
+    </Wrapper>
+  );
 };

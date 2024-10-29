@@ -1,7 +1,7 @@
 import { useDashboardContext } from '../pages';
 import Wrapper from '../wrappers/Navbar';
 import { FaAlignLeft } from 'react-icons/fa';
-import { LogoutContainer } from './logoutContainer';
+import { LogoutContainer } from './LogoutContainer';
 import { ThemeToggle } from './ThemeToggle';
 export const Navbar = () => {
   const { toggleSidebar } = useDashboardContext();
