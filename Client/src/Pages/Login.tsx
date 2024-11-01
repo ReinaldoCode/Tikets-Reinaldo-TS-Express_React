@@ -13,10 +13,8 @@ export const action: ActionFunction = async ({ request }) => {
     password: string;
   };
   try {
-    const response = await axios.post('/api/v1/user/login', data);
-    const token = response.data.token;
-    if (!token) throw new Error('Token not found');
-    localStorage.setItem('jwtToken', token);
+    await axios.post('/api/v1/user/login', data);
+    // localStorage.setItem('jwtToken', token);
     toast.success('Login successful')
     return redirect('/dashboard');
   } catch (error: any) {
