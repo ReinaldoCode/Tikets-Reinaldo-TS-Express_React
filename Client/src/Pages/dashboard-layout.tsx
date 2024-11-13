@@ -16,12 +16,16 @@ export const DashboardLayout: React.FC = () => {
 
   const toggleDarkTheme = () => {
     var newDarkTheme = isDarkTheme;
-    newDarkTheme === 'false' ? (newDarkTheme = 'true') : newDarkTheme = 'false';
+    newDarkTheme === 'false'
+      ? (newDarkTheme = 'true')
+      : (newDarkTheme = 'false');
     setIsDarkTheme(newDarkTheme);
     document.body.classList.toggle('dark-theme');
     localStorage.setItem('darkTheme', newDarkTheme);
   };
-  const toggleSidebar = () => {setShowSidebar(!showSidebar);};
+  const toggleSidebar = () => {
+    setShowSidebar(!showSidebar);
+  };
   const logoutUser = () => {};
 
   return (
@@ -36,12 +40,12 @@ export const DashboardLayout: React.FC = () => {
       }}
     >
       <Wrapper>
-        <main className="dashboard">
+        <main className='dashboard'>
           <SmallSidebar />
           <BigSidebar />
           <div>
             <Navbar />
-            <div className="dashboard-page">
+            <div className='dashboard-page'>
               <Outlet />
             </div>
           </div>

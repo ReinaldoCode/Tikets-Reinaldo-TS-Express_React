@@ -1,10 +1,3 @@
-
 export const Stats = () => {
-  return (
-    <div>
-      Stats
-    </div>
-  )
-}
-
-
+  return <div>Stats</div>;
+};

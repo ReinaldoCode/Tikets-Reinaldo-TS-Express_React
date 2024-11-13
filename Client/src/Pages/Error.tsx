@@ -1,5 +1,5 @@
 import { useRouteError, Link } from 'react-router-dom';
-import Wrapper from '../wrappers/ErrorPage';
+import Wrapper from '../wrappers/error-page';
 import img from '../assets/error.svg';
 import { RouteError } from '../types';
 
@@ -10,9 +10,9 @@ export const Error: React.FC = () => {
     return (
       <Wrapper>
         <div>
-          <img src={img} alt="not found" />
+          <img src={img} alt='not found' />
           <h3>Page not Found</h3>
-          <Link to="/dashboard">Back Home</Link>
+          <Link to='/dashboard'>Back Home</Link>
         </div>
       </Wrapper>
     );

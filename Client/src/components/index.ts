@@ -1,4 +1,4 @@
-export * from './FormRow';
-export * from './BigSidebar';
-export * from './SmallSidebar';
+export * from './form-row';
+export * from './big-sidebar';
+export * from './small-sidebar';
 export * from './Navbar';

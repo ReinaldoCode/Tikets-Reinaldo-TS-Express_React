@@ -1,10 +1,14 @@
-import { ActionFunction, Form, redirect, useNavigation } from 'react-router-dom';
+import {
+  ActionFunction,
+  Form,
+  redirect,
+  useNavigation,
+} from 'react-router-dom';
 import { FormRow } from '../components';
-import Wrapper from '../wrappers/LoginPage';
+import Wrapper from '../wrappers/login-page';
 import React from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-
 
 export const action: ActionFunction = async ({ request }) => {
   const fromData = await request.formData();
@@ -15,11 +19,11 @@ export const action: ActionFunction = async ({ request }) => {
   try {
     await axios.post('/api/v1/user/login', data);
     // localStorage.setItem('jwtToken', token);
-    toast.success('Login successful')
+    toast.success('Login successful');
     return redirect('/dashboard');
   } catch (error: any) {
-  toast.error(error.response.data.msg)
-   return (error)
+    toast.error(error.response.data.msg);
+    return error;
   }
 };
 
@@ -28,22 +32,22 @@ export const Login: React.FC = () => {
   const isSubmitting = navigation.state === 'submitting';
   return (
     <Wrapper>
-      <Form className="form" method='post'>
+      <Form className='form' method='post'>
         <h4>Login</h4>
         <FormRow
-          type="email"
-          name="email"
-          lableText="email"
-          defaultValue="test-2@gmail.com"
+          type='email'
+          name='email'
+          lableText='email'
+          defaultValue='test-2@gmail.com'
         />
         <FormRow
-          type="password"
-          name="password"
-          lableText="password"
-          defaultValue="123"
+          type='password'
+          name='password'
+          lableText='password'
+          defaultValue='123'
         />
-        <button type="submit" className="btn btn-block" disabled={isSubmitting}>
-        {isSubmitting ? "Submitting..." : "Submit"}
+        <button type='submit' className='btn btn-block' disabled={isSubmitting}>
+          {isSubmitting ? 'Submitting...' : 'Submit'}
         </button>
       </Form>
     </Wrapper>
