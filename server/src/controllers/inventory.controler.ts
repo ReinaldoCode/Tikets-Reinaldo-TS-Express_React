@@ -8,10 +8,10 @@ import {
   SELECT_ITEM_BY_USER_ID,
   UPDATE_ITEM_BY_ID,
 } from '../db/queries';
-import { Inventory } from '../models/inventory';
+import { Inventory } from '../types/inventory';
 import { validateID, getItemData, findById, getUpdateItemData } from '../utils';
 import { BadRequestError, NotFoundError } from '../error/custom.error';
-import { AuthenticatedRequest, User } from '../models/user';
+import { AuthenticatedRequest, User, UserReq } from '../types/user';
 
 export const getAllInventory = async (
   req: AuthenticatedRequest,
@@ -19,7 +19,6 @@ export const getAllInventory = async (
   next: NextFunction,
 ) => {
   try {
-    console.log(req.user?.user_id)
     const { rows } = await pool.query<Inventory>(SELECT_ALL_INVENTORY);
     res.status(200).json(rows);
   } catch (error) {
@@ -69,7 +68,13 @@ export const createNewItem = async (
   next: NextFunction,
 ) => {
   try {
-    await pool.query<Inventory>(CREATE_NEW_ITEM, getItemData(req.body));
+    const UserData = req as unknown as UserReq;
+    const user_id = UserData?.user.user_id;
+    await pool.query<Inventory>(
+      CREATE_NEW_ITEM,
+      getItemData(req.body, user_id),
+    );
+
     res.status(201).json({ msg: 'Item Created' });
   } catch (error) {
     next(error);
@@ -98,7 +103,7 @@ export const updateItemByID = async (
     const values = getUpdateItemData(req.body, rows[0], id);
 
     await pool.query<Inventory>(UPDATE_ITEM_BY_ID, values);
-    
+
     res.status(200).json({ msg: 'Item has been updated' });
   } catch (error) {
     next(error);

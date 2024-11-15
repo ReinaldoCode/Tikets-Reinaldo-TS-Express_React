@@ -1,7 +1,7 @@
-import { Inventory, UpdateInverntory } from '../models/inventory';
+import { Inventory, UpdateInverntory } from '../types/inventory';
 import { BadRequestError } from '../error/custom.error';
 
-export const getItemData = (item: Inventory) => {
+export const getItemData = (item: Inventory, user_id: string) => {
   const {
     equipment_type,
     brand,
@@ -10,7 +10,6 @@ export const getItemData = (item: Inventory) => {
     purchase_date,
     price,
     status,
-    user_id,
     assigned_to,
     location,
     warranty_expiry,
@@ -48,6 +47,7 @@ export const getItemData = (item: Inventory) => {
     condition,
     buy_from,
   ];
+
   return value;
 };
 
@@ -66,10 +66,16 @@ export const getUpdateItemData = (
   const { status, assigned_to, location, condition } = item;
   const values = [
     updatedStatus === status || !updatedStatus ? status : updatedStatus,
-    updatedAssigned_to === assigned_to || !updatedAssigned_to ? assigned_to : updatedAssigned_to,
-    updatedLocation === location || !updatedLocation ? location : updatedLocation,
-    updatedCondition ===condition || !updatedCondition ?condition : updatedCondition,
+    updatedAssigned_to === assigned_to || !updatedAssigned_to
+      ? assigned_to
+      : updatedAssigned_to,
+    updatedLocation === location || !updatedLocation
+      ? location
+      : updatedLocation,
+    updatedCondition === condition || !updatedCondition
+      ? condition
+      : updatedCondition,
     id,
-  ]
+  ];
   return values;
 };

@@ -32,3 +32,6 @@
   "updatedLocation": "update-test",
   "updatedCondition": "FAIR"
 }
+
+
+ "Monitor","HP","1010","test-1","10/8/2025","10.5","IN USE","test-1","test-1","10/8/2025","GOOD", "BestBuy","d7a88e48-d697-4845-9e49-45f0b5922a46"

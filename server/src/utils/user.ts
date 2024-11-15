@@ -1,15 +1,19 @@
-import { UpdatedUserInput, User } from '../models/user';
+import { UpdatedUserInput, User } from '../types/user';
 import { hashPassword, validPassword } from './password';
 
-
-export const getNewUserData = async (name:string, email:string, password:string,  first: number) => {
-    const hased = await hashPassword(password);
-    const created_date = new Date();
-    const updated_date = created_date;
-    let role = '';
-    first === 0 ? (role = 'admin') : (role = 'user');
-    const values = [name, email, hased, role, created_date, updated_date];
-    return values;
+export const getNewUserData = async (
+  name: string,
+  email: string,
+  password: string,
+  first: number,
+) => {
+  const hased = await hashPassword(password);
+  const created_date = new Date();
+  const updated_date = created_date;
+  let role = '';
+  first === 0 ? (role = 'admin') : (role = 'user');
+  const values = [name, email, hased, role, created_date, updated_date];
+  return values;
 };
 
 export const updateUserData = async (

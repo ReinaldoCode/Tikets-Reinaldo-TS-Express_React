@@ -1,5 +1,5 @@
 import { useDashboardContext } from '../pages';
-import Wrapper from '../wrappers/Navbar';
+import Wrapper from '../wrappers/navbar';
 import { FaAlignLeft } from 'react-icons/fa';
 import { LogoutContainer } from './logout-container';
 import { ThemeToggle } from './theme-toggle';

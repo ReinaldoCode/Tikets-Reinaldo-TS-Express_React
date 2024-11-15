@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Wrapper } from '../wrappers/landing-page';
+import Wrapper from '../wrappers/landing-page';
 import main from '../assets/main.svg';
 
 export const Landing = () => {

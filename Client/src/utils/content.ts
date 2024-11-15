@@ -1,0 +1,12 @@
+export const ITEM_STATUS = {
+  IN_USE: 'IN USE',
+  IN_STORAGE: 'IN STORAGE',
+  REPAIRED: 'REPAIRED',
+  DISPOSED: 'DISPOSED',
+};
+export const ITEM_CONDITION = {
+  NEW: 'NEW',
+  GOOD: 'GOOD',
+  FAIR: 'FAIR',
+  POOR: 'POOR',
+};

@@ -1,6 +1,6 @@
 import { useDashboardContext } from '../pages';
 
-import { Wrapper } from '../wrappers/small-sidebar';
+import Wrapper from '../wrappers/small-sidebar';
 import { FaTimes } from 'react-icons/fa';
 
 import { NavLinks } from './nav-link';

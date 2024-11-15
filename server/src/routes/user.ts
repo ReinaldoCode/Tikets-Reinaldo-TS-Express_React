@@ -13,10 +13,9 @@ const userRouter = Router();
 
 userRouter.route('/').get(getAllUsers).post(createUser);
 
-userRouter.route('/static/:id').patch(updateUser).delete(deleteUser).get(getUserById);
+userRouter.route('/static/update').patch(updateUser);
+userRouter.route('/static/delete').delete(deleteUser);
 
-userRouter.route('/login').post(login);
-
-userRouter.route('/logout').get(logout)
+userRouter.route('/current-user').get(getUserById);
 
 export { userRouter };

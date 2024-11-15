@@ -15,9 +15,10 @@ import {
   validateID,
   validPassword,
 } from '../utils';
-import { User } from '../models/user';
+
 import { BadRequestError, NotFoundError } from '../error/custom.error';
 import { createJWT } from '../utils/token';
+import { User, UserReq } from '../types/user';
 
 export const getAllUsers = async (
   req: Request,
@@ -38,8 +39,8 @@ export const getUserById = async (
   next: NextFunction,
 ) => {
   try {
-    
-    const id = req.params.id;
+    const UserData = req as unknown as UserReq;
+    const id = UserData?.user.user_id;
     if (!validateID(id)) throw new BadRequestError('Wrong ID format');
     const { rowCount, rows } = await pool.query<User>(GET_USER_BY_ID, [id]);
     if (!findById(rowCount)) throw new NotFoundError(`No user with ID ${id}`);
@@ -72,7 +73,8 @@ export const updateUser = async (
   next: NextFunction,
 ) => {
   try {
-    const id = req.params.id;
+    const UserData = req as unknown as UserReq;
+    const id = UserData?.user.user_id;
     if (!validateID(id)) throw new BadRequestError('Wrong ID format');
     const { rowCount, rows } = await pool.query<User>(GET_USER_BY_ID, [id]);
     if (!findById(rowCount)) throw new NotFoundError(`No user with ID ${id}`);
@@ -90,7 +92,8 @@ export const deleteUser = async (
   next: NextFunction,
 ) => {
   try {
-    const id = req.params.id;
+    const UserData = req as unknown as UserReq;
+    const id = UserData?.user.user_id;
     if (!validateID(id)) throw new BadRequestError('Wrong ID format');
     const { rowCount } = await pool.query<User>(DELETE_USER_BY_ID, [id]);
     if (!findById(rowCount)) throw new NotFoundError(`No user with ID ${id}`);
@@ -124,10 +127,10 @@ export const login = async (
 };
 
 export const logout = async (req: Request, res: Response) => {
-  res.cookie('token', 'logout',{
+  res.cookie('token', 'logout', {
     httpOnly: true,
     expires: new Date(Date.now()),
-  })
+  });
 
-  res.status(200).json({msg: 'User loggout'})
+  res.status(200).json({ msg: 'User loggout' });
 };

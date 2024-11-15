@@ -11,8 +11,12 @@ import {
   AllItems,
   Profile,
   Admin,
+  LoginAction,
+  AddItemAction,
 } from './pages';
-import { action  as LoginAction } from './pages';
+
+import { loader as dashboardLoader } from './pages';
+
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem('darkTheme') === 'true';
   document.body.classList.toggle('dark-theme', isDarkTheme);
@@ -39,10 +43,12 @@ const router = createBrowserRouter([
       {
         path: '/dashboard',
         element: <DashboardLayout />,
+        loader: dashboardLoader,
         children: [
           {
             index: true,
             element: <AddItems />,
+            action: AddItemAction,
           },
           {
             path: 'stats',
