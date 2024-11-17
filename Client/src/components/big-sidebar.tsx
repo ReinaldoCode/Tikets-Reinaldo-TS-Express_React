@@ -1,7 +1,7 @@
 import { useDashboardContext } from '../pages';
 import Wrapper from '../wrappers/big-sidebar';
+import { NavLinksBig } from './nav-link-big';
 
-import { NavLinks } from './nav-link';
 export const BigSidebar: React.FC = () => {
   const { showSidebar } = useDashboardContext();
   return (
@@ -15,7 +15,7 @@ export const BigSidebar: React.FC = () => {
           <header>
             <h3>Inventory</h3>
           </header>
-          <NavLinks />
+          <NavLinksBig />
         </div>
       </div>
     </Wrapper>

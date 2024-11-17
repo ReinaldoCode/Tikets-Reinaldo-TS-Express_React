@@ -3,7 +3,7 @@ import { useDashboardContext } from '../pages';
 import Wrapper from '../wrappers/small-sidebar';
 import { FaTimes } from 'react-icons/fa';
 
-import { NavLinks } from './nav-link';
+import { NavLinksSmall } from './nav-link-small';
 export const SmallSidebar = () => {
   const { showSidebar, toggleSidebar } = useDashboardContext();
 
@@ -21,7 +21,7 @@ export const SmallSidebar = () => {
           <header>
             <h3>Inventory</h3>
           </header>
-          <NavLinks />
+          <NavLinksSmall />
         </div>
       </div>
     </Wrapper>

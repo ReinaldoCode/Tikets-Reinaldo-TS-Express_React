@@ -66,9 +66,15 @@ const Wrapper = styled.article`
     display: flex;
     align-items: center;
   }
-  .edit-btn,
+  .edit-btn {
+    height: 15px;
+    width: 35px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+  }
   .delete-btn {
-    height: 30px;
     font-size: 0.85rem;
     display: flex;
     align-items: center;

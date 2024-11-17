@@ -7,7 +7,7 @@ import { checkDefaultTheme } from '../App';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-export const loader = async () => {
+export const loaderDashboard = async () => {
   try {
     const { data } = await axios.get('/api/v1/users/current-user');
     return data[0] as User;

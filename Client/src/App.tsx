@@ -13,9 +13,9 @@ import {
   Admin,
   LoginAction,
   AddItemAction,
+  loaderDashboard,
+  loaderAllItmes,
 } from './pages';
-
-import { loader as dashboardLoader } from './pages';
 
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem('darkTheme') === 'true';
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
       {
         path: '/dashboard',
         element: <DashboardLayout />,
-        loader: dashboardLoader,
+        loader: loaderDashboard,
         children: [
           {
             index: true,
@@ -57,6 +57,7 @@ const router = createBrowserRouter([
           {
             path: 'all-items',
             element: <AllItems />,
+            loader: loaderAllItmes,
           },
           {
             path: 'profile',
