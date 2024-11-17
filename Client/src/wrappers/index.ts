@@ -1,6 +1,6 @@
 export * from './big-sidebar';
 export * from './charts-container';
-export * from './Dashboard';
+export * from './dashboard';
 export * from './dashboard-form-page';
 export * from './error-page';
 export * from './item-info';

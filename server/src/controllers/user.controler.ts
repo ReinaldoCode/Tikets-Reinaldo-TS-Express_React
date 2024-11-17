@@ -74,11 +74,12 @@ export const updateUser = async (
 ) => {
   try {
     const UserData = req as unknown as UserReq;
-    const id = UserData?.user.user_id;
+    const id = UserData?.user.user_id as string;
     if (!validateID(id)) throw new BadRequestError('Wrong ID format');
     const { rowCount, rows } = await pool.query<User>(GET_USER_BY_ID, [id]);
     if (!findById(rowCount)) throw new NotFoundError(`No user with ID ${id}`);
     const values = await updateUserData(req.body, rows[0], id);
+    console.log(values);
     await pool.query<User>(UPDATE_USER_BY_ID, values);
     res.status(200).json({ msg: 'User updated' });
   } catch (error) {

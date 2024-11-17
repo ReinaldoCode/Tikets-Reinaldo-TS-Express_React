@@ -15,6 +15,10 @@ import {
   AddItemAction,
   loaderDashboard,
   loaderAllItmes,
+  EditItems,
+  actionEdit,
+  loaderEdit,
+  actionDelete,
 } from './pages';
 
 export const checkDefaultTheme = () => {
@@ -66,6 +70,16 @@ const router = createBrowserRouter([
           {
             path: 'admin',
             element: <Admin />,
+          },
+          {
+            path: 'edit-item/:id',
+            element: <EditItems />,
+            action: actionEdit,
+            loader: loaderEdit,
+          },
+          {
+            path: 'delete-item/:id',
+            action: actionDelete,
           },
         ],
       },

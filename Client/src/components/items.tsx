@@ -7,6 +7,7 @@ import { Form, Link } from 'react-router-dom';
 day.extend(advancedFormat);
 
 export const Items = ({
+  equipment_id,
   equipment_type,
   brand,
   model,
@@ -22,6 +23,7 @@ export const Items = ({
 }: ItemsT) => {
   const purchaseDate = day(purchase_date).format('MMM Do, YYYY');
   const warrantyDate = day(warranty_expiry).format('MMM Do, YYYY');
+
   return (
     <Wrapper>
       <header>
@@ -45,10 +47,10 @@ export const Items = ({
           <ItemInfo text={warrantyDate} />
         </div>
         <footer className='actions'>
-          <Link className='btn edit-btn' to={''}>
+          <Link className='btn edit-btn' to={`../edit-item/${equipment_id}`}>
             Edit
           </Link>
-          <Form>
+          <Form method='delete' action={`../delete-item/${equipment_id}`}>
             <button type='submit' className='btn delete-btn'>
               Delete
             </button>
