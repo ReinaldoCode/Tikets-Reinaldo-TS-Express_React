@@ -22,7 +22,7 @@ const DashboardContext = createContext<DashboardContextProps>(
 
 export const DashboardLayout: React.FC = () => {
   const userData = useLoaderData() as User;
-  const user = { name: userData?.name };
+  const user = { name: userData?.name, role: userData?.role };
   const navigate = useNavigate();
   const [showSidebar, setShowSidebar] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(checkDefaultTheme);

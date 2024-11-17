@@ -26,8 +26,13 @@ export const loaderEdit: LoaderFunction = async ({ params }) => {
 export const actionEdit: ActionFunction = async ({ request, params }) => {
   const fromData = await request.formData();
   const data = Object.fromEntries(fromData);
-  console.log(data);
   try {
+    const userData = await axios.get('/api/v1/users/current-user');
+    const role = userData.data[0].role;
+    if (role === 'user') {
+      toast.error('Need admin permitions');
+      return redirect('/dashboard/all-items');
+    }
     await axios.patch(`/api/v1/inventory/${params.id}`, data);
 
     toast.success('Item has been updated');
