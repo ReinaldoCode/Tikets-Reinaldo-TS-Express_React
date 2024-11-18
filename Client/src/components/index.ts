@@ -5,3 +5,5 @@ export * from './navbar';
 export * from './from-row-select';
 export * from './items-container';
 export * from './search-container';
+export * from './profile-container';
+export * from './profile';

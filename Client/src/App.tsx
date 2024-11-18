@@ -10,7 +10,6 @@ import {
   Stats,
   AllItems,
   Profile,
-  Admin,
   LoginAction,
   AddItemAction,
   loaderDashboard,
@@ -19,6 +18,7 @@ import {
   actionEdit,
   loaderEdit,
   actionDelete,
+  loaderProfile,
 } from './pages';
 
 export const checkDefaultTheme = () => {
@@ -66,10 +66,7 @@ const router = createBrowserRouter([
           {
             path: 'profile',
             element: <Profile />,
-          },
-          {
-            path: 'admin',
-            element: <Admin />,
+            loader: loaderProfile,
           },
           {
             path: 'edit-item/:id',

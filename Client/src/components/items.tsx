@@ -1,9 +1,10 @@
 import { ItemsT } from '../types/items';
 import day from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
-import Wrapper from '../wrappers/itmes';
+
 import { ItemInfo } from './item-info';
 import { Form, Link } from 'react-router-dom';
+import Wrapper from '../wrappers/itmes';
 day.extend(advancedFormat);
 
 export const Items = ({

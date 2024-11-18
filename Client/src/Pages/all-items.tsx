@@ -14,6 +14,7 @@ export const loaderAllItmes = async () => {
 };
 
 const AllItemsContext = createContext({});
+
 export const AllItems = () => {
   const data = useLoaderData();
 

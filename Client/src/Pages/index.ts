@@ -1,6 +1,5 @@
 export * from './home-layout';
 export * from './add-items';
-export * from './admin';
 export * from './all-items';
 export * from './dashboard-layout';
 export * from './delete-item';

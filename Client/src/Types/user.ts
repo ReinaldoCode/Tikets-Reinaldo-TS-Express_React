@@ -12,3 +12,7 @@ export type User = {
 export type UserData = {
   userData: User;
 };
+export type Profile = {
+  user: User;
+};
+export type UserArray = User[];

@@ -12,26 +12,11 @@ import { ITEM_CONDITION, ITEM_STATUS } from '../utils/content';
 import { FormRow, FormRowSelect } from '../components';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { ErrorResponse } from '../types';
 
 export const AddItemAction: ActionFunction = async ({ request }) => {
   const fromData = await request.formData();
   const data = Object.fromEntries(fromData);
-  // as {
-  //   equipment_type: string;
-  //   brand: string;
-  //   model: string;
-  //   serial_number: string;
-  //   purchase_date: string;
-  //   price: string;
-  //   status: string;
-  //   user_id: string;
-  //   assigned_to: string;
-  //   location: string;
-  //   warranty_expiry: string;
-  //   condition: string;
-  //   buy_from: string;
-  // };
+
   console.log(data);
   try {
     await axios.post('/api/v1/inventory', data), toast.success('Item added');
