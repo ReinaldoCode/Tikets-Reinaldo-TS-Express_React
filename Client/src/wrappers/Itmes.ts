@@ -44,7 +44,7 @@ const Wrapper = styled.article`
     display: grid;
     margin-top: 1rem;
     margin-bottom: 1.5rem;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     row-gap: 1.5rem;
     align-items: center;
     @media (min-width: 576px) {

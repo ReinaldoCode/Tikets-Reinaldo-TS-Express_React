@@ -1,5 +1,5 @@
 import { useProfileContext } from '../pages';
-import { Profile, User } from '../types';
+import { Profile } from '../types';
 import Wrapper from '../wrappers/itmes-container';
 import { ProfileData } from './profile';
 

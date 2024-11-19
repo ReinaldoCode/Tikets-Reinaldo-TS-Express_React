@@ -4,8 +4,13 @@ import Wrapper from '../wrappers/theme-toggle';
 
 export const ThemeToggle = () => {
   const { isDarkTheme, toggleDarkTheme } = useDashboardContext();
+
   return (
-    <Wrapper onClick={toggleDarkTheme}>
+    <Wrapper
+      onClick={toggleDarkTheme}
+      role='button'
+      aria-label={`Switch to ${isDarkTheme ? 'light' : 'dark'} mode`}
+    >
       {isDarkTheme ? (
         <BsFillSunFill className='toggle-icon' />
       ) : (

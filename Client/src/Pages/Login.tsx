@@ -43,13 +43,13 @@ export const Login: React.FC = () => {
           type='email'
           name='email'
           lableText='email'
-          defaultValue='test-2@gmail.com'
+          defaultValue='test-1@gmail.com'
         />
         <FormRow
           type='password'
           name='password'
           lableText='password'
-          defaultValue='123'
+          defaultValue='1234'
         />
         <button type='submit' className='btn btn-block' disabled={isSubmitting}>
           {isSubmitting ? 'Submitting...' : 'Submit'}

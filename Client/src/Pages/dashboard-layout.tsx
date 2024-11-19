@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 export const loaderDashboard = async () => {
   try {
     const { data } = await axios.get('/api/v1/users/current-user');
+    console.log(data);
     return data[0] as User;
   } catch (error) {
     return redirect('/');
