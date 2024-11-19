@@ -18,8 +18,20 @@ export type ItemsT = {
 };
 export type ItemsType = {
   data: ItemsT[];
+  filters: FiltersType;
+  setFilters: (filters: {
+    search: string;
+    status: Status | 'All';
+    condition: Condition | 'All';
+  }) => void;
 };
 
 export type ItemI = {
   text: string;
+};
+
+export type FiltersType = {
+  search: string;
+  status: Status | 'ALL';
+  condition: Condition | 'ALL';
 };

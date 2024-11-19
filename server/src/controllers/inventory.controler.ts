@@ -1,8 +1,9 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction, query } from 'express';
 import { pool } from '../db';
 import {
   CREATE_NEW_ITEM,
   DELETE_ITEM_BY_ID,
+  GET_BUY_FROM,
   SELECT_ALL_INVENTORY,
   SELECT_ITEM_BY_ID,
   SELECT_ITEM_BY_USER_ID,
@@ -122,6 +123,19 @@ export const deleteItemByID = async (
     if (!findById(rowCount))
       throw new NotFoundError(`No item with user id ${id}`);
     res.status(200).json({ msg: 'Item Deleted' });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getBuyFrom = async (
+  req: AuthenticatedRequest,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { rows } = await pool.query<Inventory>(GET_BUY_FROM);
+    res.status(200).json(rows);
   } catch (error) {
     next(error);
   }

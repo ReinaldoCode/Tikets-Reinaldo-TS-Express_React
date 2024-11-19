@@ -14,7 +14,13 @@ const Wrapper = styled.section`
     grid-template-columns: 1fr;
     row-gap: 2rem;
   }
-  @media (min-width: 1120px) {
+  @media (min-width: 1280px) {
+    .jobs {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+  }
+  @media (min-width: 1900px) {
     .jobs {
       grid-template-columns: 1fr 1fr 1fr;
       gap: 2rem;

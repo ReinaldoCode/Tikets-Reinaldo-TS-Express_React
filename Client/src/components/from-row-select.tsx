@@ -2,8 +2,10 @@ import { RowSelect } from '../types';
 export const FormRowSelect: React.FC<RowSelect> = ({
   name,
   lableText,
-  defaultValue,
+
   list,
+  value,
+  onChange,
 }) => {
   return (
     <div className='form-row'>
@@ -14,7 +16,8 @@ export const FormRowSelect: React.FC<RowSelect> = ({
         name={name}
         id={name}
         className='form-select'
-        defaultValue={defaultValue || ''}
+        value={value}
+        onChange={onChange}
       >
         {list.map((itemValue: string) => {
           return (

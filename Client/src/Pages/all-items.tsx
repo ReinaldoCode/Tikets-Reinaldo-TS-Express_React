@@ -2,7 +2,8 @@ import axios from 'axios';
 import { useLoaderData } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { ItmesContainer, SearchContainer } from '../components';
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useState } from 'react';
+import { FiltersType } from '../types/items';
 
 export const loaderAllItmes = async () => {
   try {
@@ -17,9 +18,13 @@ const AllItemsContext = createContext({});
 
 export const AllItems = () => {
   const data = useLoaderData();
-
+  const [filters, showFilter] = useState<FiltersType>({
+    search: '',
+    status: 'ALL',
+    condition: 'ALL',
+  });
   return (
-    <AllItemsContext.Provider value={{ data }}>
+    <AllItemsContext.Provider value={{ data, filters, showFilter }}>
       <SearchContainer />
       <ItmesContainer />
     </AllItemsContext.Provider>

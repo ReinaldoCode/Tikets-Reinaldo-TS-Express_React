@@ -8,7 +8,7 @@ import {
 import { toast } from 'react-toastify';
 import Wrapper from '../wrappers/dashboard-form-page';
 import { Form, ActionFunction } from 'react-router-dom';
-import { FormRow, FormRowSelect } from '../components';
+import { FormRowEdit, FormRowSelect } from '../components';
 import { ITEM_CONDITION, ITEM_STATUS } from '../utils/content';
 import { ItemsT } from '../types/items';
 
@@ -52,13 +52,13 @@ export const EditItems = () => {
       <Form method='patch' className='form'>
         <h4 className='form-title'>edit item</h4>
         <div className='form-center'>
-          <FormRow
+          <FormRowEdit
             type='text'
             name='updatedAssigned_to'
             lableText='assigned_to'
             defaultValue={data.assigned_to as string}
           />
-          <FormRow
+          <FormRowEdit
             type='text'
             name='updatedLocation'
             lableText='location'

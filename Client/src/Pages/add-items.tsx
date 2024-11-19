@@ -3,12 +3,11 @@ import {
   Form,
   redirect,
   useNavigation,
-  useOutletContext,
 } from 'react-router-dom';
-import { UserData } from '../types/user';
+
 import Wrapper from '../wrappers/dashboard-form-page';
 
-import { ITEM_CONDITION, ITEM_STATUS } from '../utils/content';
+import { ITEM_CONDITION, ITEM_STATUS, LOCATION } from '../utils/content';
 import { FormRow, FormRowSelect } from '../components';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -29,8 +28,8 @@ export const AddItemAction: ActionFunction = async ({ request }) => {
 };
 
 export const AddItems = () => {
-  const user: UserData = useOutletContext();
-  const userData = user?.userData;
+  // const user: UserData = useOutletContext();
+  // const userData = user?.userData;
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
 
@@ -66,11 +65,11 @@ export const AddItems = () => {
             lableText='assigned_to'
             defaultValue=''
           />
-          <FormRow
-            type='text'
+          <FormRowSelect
             name='location'
             lableText='location'
-            defaultValue=''
+            defaultValue={LOCATION.DANIA}
+            list={Object.values(LOCATION)}
           />
           <FormRow
             type='text'

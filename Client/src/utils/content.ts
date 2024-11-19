@@ -25,3 +25,8 @@ export const ITEM_CONDITION_SERCH = {
   FAIR: 'FAIR',
   POOR: 'POOR',
 };
+
+export const LOCATION = {
+  DANIA: 'Dania Beach',
+  NICA: 'Nicaragua',
+};

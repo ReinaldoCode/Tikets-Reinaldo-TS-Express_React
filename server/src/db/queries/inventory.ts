@@ -4,3 +4,4 @@ export const SELECT_ITEM_BY_ID = `SELECT * FROM inventory WHERE equipment_id = $
 export const SELECT_ITEM_BY_USER_ID = `SELECT * FROM inventory WHERE user_id = $1`;
 export const UPDATE_ITEM_BY_ID = `UPDATE inventory SET status = $1, assigned_to = $2, location = $3, condition = $4 WHERE equipment_id = $5`;
 export const DELETE_ITEM_BY_ID = `DELETE FROM inventory WHERE equipment_id = $1`;
+export const GET_BUY_FROM = `SELECT buy_from FROM inventory`;
