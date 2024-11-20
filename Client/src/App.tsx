@@ -19,6 +19,7 @@ import {
   loaderEdit,
   actionDelete,
   loaderProfile,
+  loaderStats,
 } from './pages';
 
 export const checkDefaultTheme = () => {
@@ -57,6 +58,7 @@ const router = createBrowserRouter([
           {
             path: 'stats',
             element: <Stats />,
+            loader: loaderStats,
           },
           {
             path: 'all-items',

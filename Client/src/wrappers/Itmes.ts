@@ -86,10 +86,6 @@ const Wrapper = styled.article`
     height: 50px;
     border-radius: 100%;
   }
-  .delete-icon {
-    width: 70px;
-    height: 60px;
-  }
 `;
 
 export default Wrapper;

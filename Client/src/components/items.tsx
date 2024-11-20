@@ -34,8 +34,8 @@ export const Items = ({
           <h5>{brand}</h5>
           <EditComponent equipment_id={equipment_id} />
           <Form method='delete' action={`../delete-item/${equipment_id}`}>
-            <button type='submit' className='btn delete-btn c-btn'>
-              <FaTrashAlt />
+            <button type='submit' className='btn-delete delete-btn c-btn'>
+              <FaTrashAlt className='new-icon ' />
             </button>
           </Form>
 
