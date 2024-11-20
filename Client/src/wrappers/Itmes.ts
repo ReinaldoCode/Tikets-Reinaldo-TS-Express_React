@@ -27,6 +27,9 @@ const Wrapper = styled.article`
     margin-right: 2rem;
   }
   .info {
+    display: grid;
+    grid-template-columns: 5fr 0.5fr 0.5fr;
+    gap: 5px;
     h5 {
       margin-bottom: 0.5rem;
     }
@@ -67,8 +70,6 @@ const Wrapper = styled.article`
     align-items: center;
   }
   .edit-btn {
-    height: 15px;
-    width: 35px;
     font-size: 0.85rem;
     display: flex;
     align-items: center;
@@ -78,9 +79,16 @@ const Wrapper = styled.article`
     font-size: 0.85rem;
     display: flex;
     align-items: center;
+    padding-left: 20px;
   }
-  .edit-btn {
-    margin-right: 0.5rem;
+  .c-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+  }
+  .delete-icon {
+    width: 70px;
+    height: 60px;
   }
 `;
 

@@ -7,3 +7,4 @@ export * from './items-container';
 export * from './search-container';
 export * from './profile-container';
 export * from './profile';
+export * from './edit';

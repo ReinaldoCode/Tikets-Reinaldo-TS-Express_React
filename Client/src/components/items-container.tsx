@@ -17,6 +17,12 @@ export const ItmesContainer = () => {
   }
   return (
     <Wrapper>
+      <div className='form total'>
+        <h5>
+          Total: <span className='total'>{filteredData.length}</span>
+        </h5>
+      </div>
+
       <div className='jobs'>
         {filteredData.map((item: ItemsT) => {
           return <Items key={item.equipment_id} {...item} />;

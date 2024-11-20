@@ -5,7 +5,7 @@ import {
   useNavigation,
   useActionData,
 } from 'react-router-dom';
-import { FormRow } from '../components';
+import { FormRowEdit } from '../components';
 import Wrapper from '../wrappers/login-page';
 import React from 'react';
 import axios from 'axios';
@@ -39,13 +39,13 @@ export const Login: React.FC = () => {
       <Form className='form' method='post'>
         <h4>Login</h4>
         {errors?.msg && <p style={{ color: 'red' }}>{errors.msg}</p>}
-        <FormRow
+        <FormRowEdit
           type='email'
           name='email'
           lableText='email'
           defaultValue='test-1@gmail.com'
         />
-        <FormRow
+        <FormRowEdit
           type='password'
           name='password'
           lableText='password'

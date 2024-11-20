@@ -9,10 +9,16 @@ const Wrapper = styled.section`
     font-weight: 700;
     margin-bottom: 1.5rem;
   }
+  span.total {
+    color: orange;
+  }
   .jobs {
     display: grid;
     grid-template-columns: 1fr;
     row-gap: 2rem;
+  }
+  .total {
+    align-content: center;
   }
   @media (min-width: 1280px) {
     .jobs {

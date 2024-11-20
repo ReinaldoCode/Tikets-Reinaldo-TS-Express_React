@@ -17,7 +17,7 @@ export const loaderAllItmes = async () => {
 const AllItemsContext = createContext({});
 
 export const AllItems = () => {
-  const data = useLoaderData();
+  const data = useLoaderData() as [];
   const [filters, showFilter] = useState<FiltersType>({
     search: '',
     status: 'ALL',

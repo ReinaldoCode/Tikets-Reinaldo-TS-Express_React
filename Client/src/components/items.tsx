@@ -1,10 +1,11 @@
 import { ItemsT } from '../types/items';
 import day from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
-
 import { ItemInfo } from './item-info';
-import { Form, Link } from 'react-router-dom';
+import { Form } from 'react-router-dom';
+import { FaTrashAlt } from 'react-icons/fa';
 import Wrapper from '../wrappers/itmes';
+import { EditComponent } from './edit';
 day.extend(advancedFormat);
 
 export const Items = ({
@@ -31,6 +32,13 @@ export const Items = ({
         <div className='main-icon'>{equipment_type.charAt(0)}</div>
         <div className='info'>
           <h5>{brand}</h5>
+          <EditComponent equipment_id={equipment_id} />
+          <Form method='delete' action={`../delete-item/${equipment_id}`}>
+            <button type='submit' className='btn delete-btn c-btn'>
+              <FaTrashAlt />
+            </button>
+          </Form>
+
           <p>{model}</p>
         </div>
       </header>
@@ -47,16 +55,6 @@ export const Items = ({
           <ItemInfo text={purchaseDate} />
           <ItemInfo text={warrantyDate} />
         </div>
-        <footer className='actions'>
-          <Link className='btn edit-btn' to={`../edit-item/${equipment_id}`}>
-            Edit
-          </Link>
-          <Form method='delete' action={`../delete-item/${equipment_id}`}>
-            <button type='submit' className='btn delete-btn'>
-              Delete
-            </button>
-          </Form>
-        </footer>
       </div>
     </Wrapper>
   );
