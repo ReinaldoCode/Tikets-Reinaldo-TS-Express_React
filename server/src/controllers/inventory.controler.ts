@@ -3,16 +3,17 @@ import { pool } from '../db';
 import {
   CREATE_NEW_ITEM,
   DELETE_ITEM_BY_ID,
-  GET_BUY_FROM,
+  MONTHLY_ITEMS,
   SELECT_ALL_INVENTORY,
   SELECT_ITEM_BY_ID,
   SELECT_ITEM_BY_USER_ID,
   UPDATE_ITEM_BY_ID,
 } from '../db/queries';
-import { Inventory } from '../types/inventory';
+import { Inventory, Month, StatsData } from '../types/inventory';
 import { validateID, getItemData, findById, getUpdateItemData } from '../utils';
 import { BadRequestError, NotFoundError } from '../error/custom.error';
 import { AuthenticatedRequest, User, UserReq } from '../types/user';
+import { expensesByMonth } from '../utils/stats';
 
 export const getAllInventory = async (
   req: AuthenticatedRequest,
@@ -20,6 +21,7 @@ export const getAllInventory = async (
   next: NextFunction,
 ) => {
   try {
+    console.log(expensesByMonth());
     const { rows } = await pool.query<Inventory>(SELECT_ALL_INVENTORY);
     res.status(200).json(rows);
   } catch (error) {
@@ -128,15 +130,42 @@ export const deleteItemByID = async (
   }
 };
 
-export const getBuyFrom = async (
-  req: AuthenticatedRequest,
+export const getStats = async (
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
   try {
-    const { rows } = await pool.query<Inventory>(GET_BUY_FROM);
-    res.status(200).json(rows);
-  } catch (error) {
-    next(error);
+    const allYear = expensesByMonth();
+    const year = allYear.year;
+    const months = allYear.month;
+
+    const enrichedMonths = await Promise.all(
+      months.map(async (month: Month) => {
+        const { rows } = await pool.query(MONTHLY_ITEMS, [
+          month.monthNumber,
+          year,
+        ]);
+
+        const montTotal: number = rows.reduce((sum, row) => {
+          const price = parseFloat(row.price) || 0;
+          return Math.round((sum + price) * 100) / 100;
+        }, 0);
+
+        return { ...month, montTotal };
+      }),
+    );
+
+    // Create the final response object
+    const responseData = {
+      year,
+      months: enrichedMonths,
+    };
+
+    // Send the response
+    res.status(200).json(responseData);
+  } catch (error: any) {
+    console.error('Error in getStats:', error);
+    res.status(500).json({ msg: 'Something went wrong', error: error.message });
   }
 };

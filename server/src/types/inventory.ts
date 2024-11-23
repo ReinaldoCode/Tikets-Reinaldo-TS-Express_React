@@ -24,3 +24,18 @@ export type UpdateInverntory = {
   updatedLocation: string;
   updatedCondition: Condition;
 };
+
+export type StatsData = {
+  month: string;
+  amount: number;
+};
+
+export type Month = {
+  monthName: string;
+  monthNumber: number;
+  price?: number;
+};
+export type MonthlyData = {
+  year: number;
+  month: Month[];
+};

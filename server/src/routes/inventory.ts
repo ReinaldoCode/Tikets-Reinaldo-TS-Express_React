@@ -3,16 +3,16 @@ import {
   createNewItem,
   deleteItemByID,
   getAllInventory,
-  getBuyFrom,
   getItemByID,
   getItemByUserID,
+  getStats,
   updateItemByID,
 } from '../controllers/inventory.controler';
 
 const inventoryRouter = Router();
 
 inventoryRouter.route('/').get(getAllInventory).post(createNewItem);
-inventoryRouter.route('/buy-from').get(getBuyFrom);
+inventoryRouter.route('/stats').get(getStats);
 inventoryRouter
   .route('/:id')
   .get(getItemByID)
