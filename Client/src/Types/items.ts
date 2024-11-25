@@ -35,3 +35,14 @@ export type FiltersType = {
   status: Status | 'ALL';
   condition: Condition | 'ALL';
 };
+type Month = {
+  monthName: string;
+  monthNumber: number;
+  price?: number;
+  itemsAmaunt?: number;
+};
+
+export type MonthlyData = {
+  year: number;
+  months: Month[];
+};

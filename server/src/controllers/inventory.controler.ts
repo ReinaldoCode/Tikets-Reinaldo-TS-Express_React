@@ -142,17 +142,17 @@ export const getStats = async (
 
     const enrichedMonths = await Promise.all(
       months.map(async (month: Month) => {
-        const { rows } = await pool.query(MONTHLY_ITEMS, [
+        const { rows, rowCount } = await pool.query(MONTHLY_ITEMS, [
           month.monthNumber,
           year,
         ]);
 
-        const montTotal: number = rows.reduce((sum, row) => {
+        const price: number = rows.reduce((sum, row) => {
           const price = parseFloat(row.price) || 0;
           return Math.round((sum + price) * 100) / 100;
         }, 0);
-
-        return { ...month, montTotal };
+        const itemsAmaunt = rowCount;
+        return { ...month, price, itemsAmaunt };
       }),
     );
 

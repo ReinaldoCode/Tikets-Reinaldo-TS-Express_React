@@ -34,6 +34,7 @@ export type Month = {
   monthName: string;
   monthNumber: number;
   price?: number;
+  itemsAmaunt?: number;
 };
 export type MonthlyData = {
   year: number;
