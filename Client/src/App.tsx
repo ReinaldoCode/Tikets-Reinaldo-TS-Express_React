@@ -20,6 +20,8 @@ import {
   actionDelete,
   loaderProfile,
   loaderStats,
+  Register,
+  registerAction,
 } from './pages';
 
 export const checkDefaultTheme = () => {
@@ -44,6 +46,11 @@ const router = createBrowserRouter([
         path: '/login',
         element: <Login />,
         action: LoginAction,
+      },
+      {
+        path: 'register',
+        element: <Register />,
+        action: registerAction,
       },
       {
         path: '/dashboard',

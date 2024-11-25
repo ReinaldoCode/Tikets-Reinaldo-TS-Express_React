@@ -9,3 +9,4 @@ export * from './landing';
 export * from './login';
 export * from './profile';
 export * from './stats';
+export * from './register';
