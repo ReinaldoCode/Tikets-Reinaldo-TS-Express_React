@@ -15,9 +15,6 @@ export const Landing = () => {
             your available items in one place. Stay organized and always have a
             clear view of what's in stock.
           </p>
-          <Link to='/register' className='btn register-link'>
-            Register
-          </Link>
           <Link to='/Login' className='btn register-link'>
             Login
           </Link>

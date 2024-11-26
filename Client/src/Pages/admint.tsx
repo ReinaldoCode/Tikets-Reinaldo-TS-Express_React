@@ -5,6 +5,7 @@ import { createContext, useContext } from 'react';
 import { LoaderFunction, useLoaderData } from 'react-router-dom';
 import { UserArray } from '../types';
 import { UsersContainer } from '../components/users-container';
+import { Link } from 'react-router-dom';
 
 export const loaderUsers: LoaderFunction = async () => {
   try {
@@ -22,6 +23,9 @@ export const Admin = () => {
   const data = useLoaderData() as UserArray;
   return (
     <usersContext.Provider value={data}>
+      <Link to='../register' className='btn register-link'>
+        add user
+      </Link>
       <UsersContainer />
     </usersContext.Provider>
   );

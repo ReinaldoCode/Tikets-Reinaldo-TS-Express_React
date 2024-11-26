@@ -1,5 +1,4 @@
 import {
-  Link,
   Form,
   ActionFunction,
   redirect,
@@ -8,10 +7,11 @@ import {
 } from 'react-router-dom';
 
 import { FormRowEdit } from '../components';
-import Wrapper from '../wrappers/login-page';
+
 import { ErrorMsg } from '../types';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Wrapper from '../wrappers/dashboard-form-page';
 
 export const registerAction: ActionFunction = async ({ request }) => {
   const fromData = await request.formData();
@@ -23,8 +23,8 @@ export const registerAction: ActionFunction = async ({ request }) => {
   const errors: ErrorMsg = { msg: '' };
   try {
     await axios.post('/api/v1/auth/register', data);
-    toast.success('Register successful');
-    return redirect('/login');
+    toast.success('user added');
+    return redirect('/dashboard/admin');
   } catch (error: any) {
     errors.msg = error?.response?.data?.msg;
     return errors;
@@ -37,30 +37,34 @@ export const Register = () => {
   return (
     <Wrapper>
       <Form method='post' className='form'>
-        <h4>Register</h4>
-        {errors?.msg && <p style={{ color: 'red' }}>{errors.msg}</p>}
-        <FormRowEdit type='text' name='name' defaultValue='' lableText='name' />
-        <FormRowEdit
-          type='email'
-          name='email'
-          lableText='email'
-          defaultValue=''
-        />
-        <FormRowEdit
-          type='password'
-          name='password'
-          defaultValue=''
-          lableText='password'
-        />
-        <button type='submit' className='btn btn-block' disabled={isSubmitting}>
-          {isSubmitting ? 'Submitting...' : 'Submit'}
-        </button>
-        <p>
-          Already have and account?
-          <Link to='/login' className='member-btn'>
-            Login
-          </Link>
-        </p>
+        <div className='form-center'>
+          <FormRowEdit
+            type='text'
+            name='name'
+            defaultValue=''
+            lableText='name'
+          />
+          <FormRowEdit
+            type='email'
+            name='email'
+            lableText='email'
+            defaultValue=''
+          />
+          <FormRowEdit
+            type='password'
+            name='password'
+            defaultValue=''
+            lableText='password'
+          />
+          <button
+            type='submit'
+            className='btn btn-block form-btn'
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Submitting...' : 'Submit'}
+          </button>
+          {errors?.msg && <p style={{ color: 'red' }}>{errors.msg}</p>}
+        </div>
       </Form>
     </Wrapper>
   );

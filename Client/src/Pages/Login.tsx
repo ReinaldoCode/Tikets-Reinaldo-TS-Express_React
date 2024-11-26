@@ -44,7 +44,7 @@ export const Login: React.FC = () => {
           type='email'
           name='email'
           lableText='email'
-          defaultValue='test-1@gmail.com'
+          defaultValue='reinaldo@gmail.com'
         />
         <FormRowEdit
           type='password'
@@ -55,12 +55,6 @@ export const Login: React.FC = () => {
         <button type='submit' className='btn btn-block' disabled={isSubmitting}>
           {isSubmitting ? 'Submitting...' : 'Submit'}
         </button>
-        <p>
-          Need and account ?
-          <Link to='/register' className='member-btn'>
-            Register
-          </Link>
-        </p>
       </Form>
     </Wrapper>
   );

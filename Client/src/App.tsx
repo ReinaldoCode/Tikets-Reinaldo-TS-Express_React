@@ -50,11 +50,6 @@ const router = createBrowserRouter([
         action: LoginAction,
       },
       {
-        path: 'register',
-        element: <Register />,
-        action: registerAction,
-      },
-      {
         path: '/dashboard',
         element: <DashboardLayout />,
         loader: loaderDashboard,
@@ -84,6 +79,11 @@ const router = createBrowserRouter([
             element: <EditItems />,
             action: actionEdit,
             loader: loaderEdit,
+          },
+          {
+            path: 'register',
+            element: <Register />,
+            action: registerAction,
           },
           {
             path: 'admin',
