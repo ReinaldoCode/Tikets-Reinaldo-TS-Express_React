@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction, query } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { pool } from '../db';
 import {
   CREATE_NEW_ITEM,
@@ -9,10 +9,10 @@ import {
   SELECT_ITEM_BY_USER_ID,
   UPDATE_ITEM_BY_ID,
 } from '../db/queries';
-import { Inventory, Month, StatsData } from '../types/inventory';
+import { Inventory, Month } from '../types/inventory';
 import { validateID, getItemData, findById, getUpdateItemData } from '../utils';
 import { BadRequestError, NotFoundError } from '../error/custom.error';
-import { AuthenticatedRequest, User, UserReq } from '../types/user';
+import { AuthenticatedRequest, UserReq } from '../types/user';
 import { expensesByMonth } from '../utils/stats';
 
 export const getAllInventory = async (

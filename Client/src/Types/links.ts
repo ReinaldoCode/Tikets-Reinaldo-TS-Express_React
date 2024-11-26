@@ -6,5 +6,6 @@ export type LinkType = {
   icon: ReactElement;
 };
 export type Edit = {
-  equipment_id: number;
+  id: number | string;
+  link: string;
 };

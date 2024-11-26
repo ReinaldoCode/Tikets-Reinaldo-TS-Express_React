@@ -32,7 +32,7 @@ export const Items = ({
         <div className='main-icon'>{equipment_type.charAt(0)}</div>
         <div className='info'>
           <h5>{brand}</h5>
-          <EditComponent equipment_id={equipment_id} />
+          <EditComponent id={equipment_id} link='../edit-item/' />
           <Form method='delete' action={`../delete-item/${equipment_id}`}>
             <button type='submit' className='btn-delete delete-btn c-btn'>
               <FaTrashAlt className='new-icon ' />

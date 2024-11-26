@@ -2,11 +2,11 @@ import { useNavigate } from 'react-router-dom';
 import { Edit } from '../types';
 import { FaEdit } from 'react-icons/fa';
 
-export const EditComponent = ({ equipment_id }: Edit) => {
+export const EditComponent = ({ id, link }: Edit) => {
   const navigate = useNavigate();
 
   const handleEdit = () => {
-    navigate(`../edit-item/${equipment_id}`);
+    navigate(`${link}${id}`);
   };
 
   return (

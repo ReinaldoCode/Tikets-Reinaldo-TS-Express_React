@@ -22,27 +22,30 @@ export const updateUserData = async (
   id: string,
 ) => {
   const {
+    updatedName = user.name,
+    updatedEmail = user.email,
+    updatedRole = user.role,
+    updatedIs_active = user.is_active,
+    updatedPassword,
+  } = update;
+
+  let passwordToStore = user.password;
+  if (
+    updatedPassword &&
+    !(await validPassword(updatedPassword, user.password))
+  ) {
+    passwordToStore = await hashPassword(updatedPassword);
+  }
+
+  const updatedDate = new Date();
+
+  const values = [
     updatedName,
     updatedEmail,
-    updatedPassword,
+    passwordToStore,
     updatedRole,
+    updatedDate,
     updatedIs_active,
-  } = update;
-  const { name, email, password, role, is_active } = user;
-
-  //passwork update funtionality needs to be fixed at the moment if no passwoed is passed and error is recived
-  const valid = await validPassword(updatedPassword, password);
-  const hassed = await hashPassword(updatedPassword);
-  const updated_date = new Date();
-  const values = [
-    updatedName == name || !updatedName ? name : updatedName,
-    updatedEmail == email || !updatedEmail ? email : updatedEmail,
-    valid || !updatedPassword ? password : hassed,
-    updatedRole == role || !updatedRole ? role : updatedRole,
-    updated_date,
-    updatedIs_active == is_active || !updatedIs_active
-      ? is_active
-      : updatedIs_active,
     id,
   ];
 

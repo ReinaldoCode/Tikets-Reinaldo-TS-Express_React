@@ -13,7 +13,7 @@ export type User = {
 export type UpdatedUserInput = {
   updatedName: string;
   updatedEmail: string;
-  updatedPassword: string;
+  updatedPassword: string | undefined;
   updatedRole: 'user' | 'admin';
   updatedIs_active: boolean;
 };
