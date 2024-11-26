@@ -21,7 +21,6 @@ export const getAllInventory = async (
   next: NextFunction,
 ) => {
   try {
-    console.log(expensesByMonth());
     const { rows } = await pool.query<Inventory>(SELECT_ALL_INVENTORY);
     res.status(200).json(rows);
   } catch (error) {

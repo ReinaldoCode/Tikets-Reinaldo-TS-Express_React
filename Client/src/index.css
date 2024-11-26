@@ -200,9 +200,10 @@ ul {
   display: inline-block;
 }
 .btn-delete:hover {
-  background: rgb(146, 22, 22);
+  background: rgb(124, 12, 12);
   box-shadow: var(--shadow-3);
 }
+
 .btn:hover {
   background: var(--primary-700);
   box-shadow: var(--shadow-3);

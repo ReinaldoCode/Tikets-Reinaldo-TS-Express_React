@@ -79,7 +79,7 @@ export const updateUser = async (
     const { rowCount, rows } = await pool.query<User>(GET_USER_BY_ID2, [id]);
     if (!findById(rowCount)) throw new NotFoundError(`No user with ID ${id}`);
     const values = await updateUserData(req.body, rows[0], id);
-    console.log(values);
+
     await pool.query<User>(UPDATE_USER_BY_ID, values);
     res.status(200).json({ msg: 'User updated' });
   } catch (error) {
