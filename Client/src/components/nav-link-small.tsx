@@ -10,7 +10,11 @@ export const NavLinksSmall = () => {
     <div className='nav-links'>
       {links.map((link: LinkType) => {
         const { text, path, icon } = link;
-        if (path === 'stats' && user.role != 'admin') return;
+        if (
+          (path === 'stats' && user.role != 'admin') ||
+          (path === 'admin' && user.role != 'admin')
+        )
+          return;
         return (
           <NavLink
             to={path}

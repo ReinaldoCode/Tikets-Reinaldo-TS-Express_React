@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { useLoaderData } from 'react-router-dom';
+import { LoaderFunction, useLoaderData } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { ItmesContainer, SearchContainer } from '../components';
 import { createContext, useContext, useState } from 'react';
 import { FiltersType } from '../types/items';
 
-export const loaderAllItmes = async () => {
+export const loaderAllItmes: LoaderFunction = async () => {
   try {
     const { data } = await axios.get('/api/v1/inventory');
     return data;

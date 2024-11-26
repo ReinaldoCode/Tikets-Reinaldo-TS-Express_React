@@ -23,6 +23,7 @@ import {
   Register,
   registerAction,
 } from './pages';
+import { Admin, loaderUsers } from './pages/admint';
 
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem('darkTheme') === 'true';
@@ -82,6 +83,11 @@ const router = createBrowserRouter([
             element: <EditItems />,
             action: actionEdit,
             loader: loaderEdit,
+          },
+          {
+            path: 'admin',
+            element: <Admin />,
+            loader: loaderUsers,
           },
           {
             path: 'delete-item/:id',

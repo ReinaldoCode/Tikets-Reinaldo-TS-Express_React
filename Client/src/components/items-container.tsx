@@ -7,7 +7,7 @@ import { Items } from './items';
 export const ItmesContainer = () => {
   const { data, filters } = useAllItemsContext() as ItemsType;
   const filteredData = filterData(data, filters);
-  console.log(filteredData);
+
   if (data.length === 0) {
     return (
       <Wrapper>

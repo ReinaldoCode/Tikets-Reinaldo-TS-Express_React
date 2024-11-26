@@ -10,10 +10,10 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { toast } from 'react-toastify';
-import { useLoaderData } from 'react-router-dom';
+import { LoaderFunction, useLoaderData } from 'react-router-dom';
 import { MonthlyData } from '../types/items';
 
-export const loaderStats = async () => {
+export const loaderStats: LoaderFunction = async () => {
   try {
     const { data } = await axios.get('/api/v1/inventory/stats');
     console.log(data);
