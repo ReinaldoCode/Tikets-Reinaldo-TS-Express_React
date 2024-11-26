@@ -10,7 +10,7 @@ const userRouter = Router();
 
 userRouter.route('/').get(getAllUsers);
 
-userRouter.route('/static/update').patch(updateUser);
+userRouter.route('/static/update/:id').patch(updateUser);
 userRouter.route('/static/delete').delete(deleteUser);
 
 userRouter.route('/current-user').get(getUserById);

@@ -6,6 +6,7 @@ import {
   GET_USER_BY_ID,
   UPDATE_USER_BY_ID,
   Login,
+  GET_USER_BY_ID2,
 } from '../db/queries';
 import { pool } from '../db';
 import {
@@ -73,10 +74,9 @@ export const updateUser = async (
   next: NextFunction,
 ) => {
   try {
-    const UserData = req as unknown as UserReq;
-    const id = UserData?.user.user_id as string;
+    const id = req.params.id;
     if (!validateID(id)) throw new BadRequestError('Wrong ID format');
-    const { rowCount, rows } = await pool.query<User>(GET_USER_BY_ID, [id]);
+    const { rowCount, rows } = await pool.query<User>(GET_USER_BY_ID2, [id]);
     if (!findById(rowCount)) throw new NotFoundError(`No user with ID ${id}`);
     const values = await updateUserData(req.body, rows[0], id);
     console.log(values);
@@ -93,8 +93,7 @@ export const deleteUser = async (
   next: NextFunction,
 ) => {
   try {
-    const UserData = req as unknown as UserReq;
-    const id = UserData?.user.user_id;
+    const id = req.params.id;
     if (!validateID(id)) throw new BadRequestError('Wrong ID format');
     const { rowCount } = await pool.query<User>(DELETE_USER_BY_ID, [id]);
     if (!findById(rowCount)) throw new NotFoundError(`No user with ID ${id}`);
@@ -112,6 +111,8 @@ export const login = async (
     const { email, password } = req.body;
     const { rowCount, rows } = await pool.query<User>(Login, [email]);
     if (!findById(rowCount)) throw new NotFoundError(`Wrong user name`);
+    const active = rows[0].is_active;
+    if (!active) throw new BadRequestError('User is inactive');
     const valid = await validPassword(password, rows[0].password);
     if (!valid) throw new BadRequestError('Wrong Password');
     const user = rows[0];

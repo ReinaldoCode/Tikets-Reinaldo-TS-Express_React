@@ -29,6 +29,14 @@ export const updateUserData = async (
     updatedIs_active,
   } = update;
   const { name, email, password, role, is_active } = user;
+  console.log(
+    updatedName,
+    updatedEmail,
+    updatedPassword,
+    updatedRole,
+    updatedIs_active,
+  );
+  console.log(name, email, password, role, is_active);
   //passwork update funtionality needs to be fixed at the moment if no passwoed is passed and error is recived
   const valid = await validPassword(updatedPassword, password);
   const hassed = await hashPassword(updatedPassword);
@@ -44,5 +52,6 @@ export const updateUserData = async (
       : updatedIs_active,
     id,
   ];
+  console.log(values);
   return values;
 };
