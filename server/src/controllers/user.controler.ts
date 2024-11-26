@@ -40,6 +40,21 @@ export const getUserById = async (
   next: NextFunction,
 ) => {
   try {
+    const id = req.params.id;
+    if (!validateID(id)) throw new BadRequestError('Wrong ID format');
+    const { rowCount, rows } = await pool.query<User>(GET_USER_BY_ID, [id]);
+    if (!findById(rowCount)) throw new NotFoundError(`No user with ID ${id}`);
+    res.status(200).json(rows);
+  } catch (error) {
+    next(error);
+  }
+};
+export const currentUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
     const UserData = req as unknown as UserReq;
     const id = UserData?.user.user_id;
     if (!validateID(id)) throw new BadRequestError('Wrong ID format');

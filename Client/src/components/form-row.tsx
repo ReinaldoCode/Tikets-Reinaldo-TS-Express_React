@@ -40,7 +40,6 @@ export const FormRowEdit: React.FC<Row> = ({
         name={name}
         defaultValue={defaultValue}
         className='form-input'
-        required
       />
     </div>
   );

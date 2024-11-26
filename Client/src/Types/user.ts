@@ -6,7 +6,7 @@ export type User = {
   role: 'user' | 'admin';
   created_date: Date;
   updated_date: Date;
-  is_active: boolean;
+  is_active: boolean | string;
 };
 
 export type UserData = {
