@@ -1,6 +1,9 @@
 import axios from 'axios';
-import { ActionFunction, redirect } from 'react-router-dom';
+
+import { ActionFunction, Form, redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Wrapper from '../wrappers/dashboard-form-page';
+import { DeleteElementProps } from '../types/items';
 
 export const actionDelete: ActionFunction = async ({ params }) => {
   try {
@@ -17,4 +20,18 @@ export const actionDelete: ActionFunction = async ({ params }) => {
     toast.error(error.response.data.msg);
     return redirect('/dashboard/all-items');
   }
+};
+
+export const DeleteModal = ({ onCancel, equipment_id }: DeleteElementProps) => {
+  return (
+    <Wrapper>
+      <p>Are you sure you want to delete the item?</p>
+      <Form method='delete' action={`../delete-item/${equipment_id}`}>
+        <button className='btn btn-block form-btn'>submit</button>
+      </Form>
+      <button className='btn btn-block form-btn' onClick={onCancel}>
+        cancel
+      </button>
+    </Wrapper>
+  );
 };

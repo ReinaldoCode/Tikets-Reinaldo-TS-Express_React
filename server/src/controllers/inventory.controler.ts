@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction, query } from 'express';
 import { pool } from '../db';
 import {
   CREATE_NEW_ITEM,
@@ -21,8 +21,27 @@ export const getAllInventory = async (
   next: NextFunction,
 ) => {
   try {
-    const { rows } = await pool.query<Inventory>(SELECT_ALL_INVENTORY);
-    res.status(200).json(rows);
+    const { limit = 12, offset = 0 } = req.query;
+    const parsedLimit = parseInt(limit as string, 10);
+    const parsedOffset = parseInt(offset as string, 10);
+    const query = `${SELECT_ALL_INVENTORY} LIMIT $1 OFFSET $2`;
+    const { rows } = await pool.query<Inventory>(query, [
+      parsedLimit,
+      parsedOffset,
+    ]);
+    const countQuery = `SELECT COUNT(*) FROM inventory`;
+    const { rows: countRows } = await pool.query<{ count: string }>(countQuery);
+    const totalCount = parseInt(countRows[0].count, 10);
+
+    res.status(200).json({
+      items: rows,
+      pagination: {
+        total: totalCount,
+        limit: parsedLimit,
+        offset: parsedOffset,
+        pages: Math.ceil(totalCount / parsedLimit),
+      },
+    });
   } catch (error) {
     next(error);
   }

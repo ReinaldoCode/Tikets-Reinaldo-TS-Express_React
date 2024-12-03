@@ -17,7 +17,16 @@ export type ItemsT = {
   buy_from: string;
 };
 export type ItemsType = {
-  data: ItemsT[];
+  data: {
+    items: ItemsT[];
+    pagination: {
+      limit: number;
+      offset: number;
+      pages: number;
+      total: number;
+    };
+  };
+  setPagination: ({}) => any;
   filters: FiltersType;
   setFilters: (filters: {
     search: string;
@@ -45,4 +54,8 @@ type Month = {
 export type MonthlyData = {
   year: number;
   months: Month[];
+};
+export type DeleteElementProps = {
+  onCancel: () => void;
+  equipment_id: number;
 };

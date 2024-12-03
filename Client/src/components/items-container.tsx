@@ -3,12 +3,13 @@ import { ItemsT, ItemsType } from '../types/items';
 import { filterData } from '../utils/filter';
 import Wrapper from '../wrappers/itmes-container';
 import { Items } from './items';
+import { PageBtnContainer } from './page-btn-container';
 
 export const ItmesContainer = () => {
   const { data, filters } = useAllItemsContext() as ItemsType;
-  const filteredData = filterData(data, filters);
-
-  if (data.length === 0) {
+  const { items, pagination } = data;
+  const filteredData = filterData(items, filters);
+  if (items.length === 0) {
     return (
       <Wrapper>
         <h2>No Itmes to display</h2>
@@ -19,7 +20,7 @@ export const ItmesContainer = () => {
     <Wrapper>
       <div className='form total'>
         <h5>
-          Total: <span className='total'>{filteredData.length}</span>
+          Total: <span className='total'>{pagination.total}</span>
         </h5>
       </div>
 
@@ -28,6 +29,7 @@ export const ItmesContainer = () => {
           return <Items key={item.equipment_id} {...item} />;
         })}
       </div>
+      {pagination.pages > 1 && <PageBtnContainer />}
     </Wrapper>
   );
 };

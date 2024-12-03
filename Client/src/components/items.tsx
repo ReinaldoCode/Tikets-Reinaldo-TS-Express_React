@@ -2,10 +2,12 @@ import { ItemsT } from '../types/items';
 import day from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 import { ItemInfo } from './item-info';
-import { Form } from 'react-router-dom';
 import { FaTrashAlt } from 'react-icons/fa';
 import Wrapper from '../wrappers/itmes';
 import { EditComponent } from './edit';
+import { useState } from 'react';
+import { DeleteModal } from '../pages';
+
 day.extend(advancedFormat);
 
 export const Items = ({
@@ -25,7 +27,10 @@ export const Items = ({
 }: ItemsT) => {
   const purchaseDate = day(purchase_date).format('MMM Do, YYYY');
   const warrantyDate = day(warranty_expiry).format('MMM Do, YYYY');
-
+  const [modal, setModal] = useState(false);
+  const handleModal = () => {
+    return setModal(!modal);
+  };
   return (
     <Wrapper>
       <header>
@@ -33,12 +38,16 @@ export const Items = ({
         <div className='info'>
           <h5>{brand}</h5>
           <EditComponent id={equipment_id} link='../edit-item/' />
-          <Form method='delete' action={`../delete-item/${equipment_id}`}>
-            <button type='submit' className='btn-delete delete-btn c-btn'>
-              <FaTrashAlt className='new-icon ' />
-            </button>
-          </Form>
-
+          <button
+            type='submit'
+            className='btn-delete delete-btn c-btn'
+            onClick={() => setModal(true)}
+          >
+            <FaTrashAlt className='new-icon ' />
+          </button>
+          {modal && (
+            <DeleteModal onCancel={handleModal} equipment_id={equipment_id} />
+          )}
           <p>{model}</p>
         </div>
       </header>

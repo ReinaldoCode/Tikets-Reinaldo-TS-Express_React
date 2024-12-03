@@ -22,6 +22,7 @@ import {
   loaderStats,
   Register,
   registerAction,
+  DeleteModal,
 } from './pages';
 import { Admin, loaderUsers } from './pages/admint';
 import { actionEditUser, EditUser, loaderEditUser } from './pages/edit-users';
@@ -98,6 +99,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'delete-item/:id',
+            element: <DeleteModal onCancel={() => {}} equipment_id={0} />,
             action: actionDelete,
           },
         ],

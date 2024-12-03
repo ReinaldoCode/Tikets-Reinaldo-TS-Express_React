@@ -5,13 +5,12 @@ import {
   useNavigation,
   useActionData,
 } from 'react-router-dom';
-import { FormRow, FormRowEdit } from '../components';
+import { FormRowEdit } from '../components';
 import Wrapper from '../wrappers/login-page';
 import React from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { ErrorMsg } from '../types';
-import { Link } from 'react-router-dom';
 
 export const LoginAction: ActionFunction = async ({ request }) => {
   const fromData = await request.formData();

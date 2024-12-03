@@ -61,7 +61,7 @@ export const Register = () => {
             className='btn btn-block form-btn'
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Submitting...' : 'Submit'}
+            {isSubmitting ? 'adding...' : 'add'}
           </button>
           {errors?.msg && <p style={{ color: 'red' }}>{errors.msg}</p>}
         </div>
