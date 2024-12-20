@@ -7,6 +7,7 @@ import {
   SELECT_ALL_INVENTORY,
   SELECT_ITEM_BY_ID,
   SELECT_ITEM_BY_USER_ID,
+  SELECT_TOTAL,
   UPDATE_ITEM_BY_ID,
 } from '../db/queries';
 import { Inventory, Month } from '../types/inventory';
@@ -21,27 +22,23 @@ export const getAllInventory = async (
   next: NextFunction,
 ) => {
   try {
-    const { limit = 12, offset = 0 } = req.query;
-    const parsedLimit = parseInt(limit as string, 10);
-    const parsedOffset = parseInt(offset as string, 10);
-    const query = `${SELECT_ALL_INVENTORY} LIMIT $1 OFFSET $2`;
-    const { rows } = await pool.query<Inventory>(query, [
-      parsedLimit,
-      parsedOffset,
-    ]);
-    const countQuery = `SELECT COUNT(*) FROM inventory`;
-    const { rows: countRows } = await pool.query<{ count: string }>(countQuery);
-    const totalCount = parseInt(countRows[0].count, 10);
-
-    res.status(200).json({
+    // const { limit, offset } = req.query;
+    // const parsedLimit = parseInt(limit as string);
+    // const parsedOffset = parseInt(offset as string);
+    // const { rows } = await pool.query<Inventory>(SELECT_ALL_INVENTORY, [
+    //   parsedLimit,
+    //   parsedOffset,
+    // ]);
+    const { rowCount, rows } = await pool.query<Inventory>(SELECT_TOTAL);
+    const total = rowCount as number;
+    // const page = Math.ceil(total / parsedLimit) || null;
+    const respond = {
+      total: total,
+      // page: page,
       items: rows,
-      pagination: {
-        total: totalCount,
-        limit: parsedLimit,
-        offset: parsedOffset,
-        pages: Math.ceil(totalCount / parsedLimit),
-      },
-    });
+    };
+
+    res.status(200).json(respond);
   } catch (error) {
     next(error);
   }
@@ -174,13 +171,11 @@ export const getStats = async (
       }),
     );
 
-    // Create the final response object
     const responseData = {
       year,
       months: enrichedMonths,
     };
 
-    // Send the response
     res.status(200).json(responseData);
   } catch (error: any) {
     console.error('Error in getStats:', error);

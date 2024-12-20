@@ -19,7 +19,7 @@ export const AddItemAction: ActionFunction = async ({ request }) => {
   console.log(data);
   try {
     await axios.post('/api/v1/inventory', data), toast.success('Item added');
-    return redirect('all-items');
+    return redirect('');
   } catch (error: any) {
     console.log(error);
     toast.error(error.response.data.msg);

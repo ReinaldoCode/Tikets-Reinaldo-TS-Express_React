@@ -19,13 +19,10 @@ export type ItemsT = {
 export type ItemsType = {
   data: {
     items: ItemsT[];
-    pagination: {
-      limit: number;
-      offset: number;
-      pages: number;
-      total: number;
-    };
+    page: number;
+    total: number;
   };
+  handlePagination: () => any;
   setPagination: ({}) => any;
   filters: FiltersType;
   setFilters: (filters: {

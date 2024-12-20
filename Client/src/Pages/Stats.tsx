@@ -39,6 +39,17 @@ export const Stats = () => {
             <Bar name='Total of Items:' dataKey='itemsAmaunt' fill='#f99e02' />
           </BarChart>
         </ResponsiveContainer>
+        <h4>5 Year data</h4>
+        {/* <ResponsiveContainer>
+          <BarChart data={years}>
+            <CartesianGrid />
+            <XAxis dataKey='number' />
+            <YAxis />
+            <Tooltip />
+            <Bar name='Total expeded:' dataKey='price' fill='#625ae8' />
+            <Bar name='Total of Items:' dataKey='itemsAmaunt' fill='#f99e02' />
+          </BarChart>
+        </ResponsiveContainer> */}
       </div>
     </Wrapper>
   );

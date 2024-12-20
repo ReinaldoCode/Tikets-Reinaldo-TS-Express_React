@@ -20,6 +20,17 @@ const Wrapper = styled.section`
   .total {
     align-content: center;
   }
+  .total-div {
+    display: flex;
+    gap: 15px;
+    width: 90vw;
+    max-width: var(--fixed-width);
+    background: var(--background-secondary-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-2);
+    padding: 2rem 2.5rem;
+    margin: 3rem auto;
+  }
   @media (min-width: 1280px) {
     .jobs {
       grid-template-columns: 1fr 1fr;

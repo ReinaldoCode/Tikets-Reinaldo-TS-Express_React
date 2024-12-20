@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import Wrapper from '../wrappers/dashboard-form-page';
 import { DeleteElementProps } from '../types/items';
 
-export const actionDelete: ActionFunction = async ({ params }) => {
+export const actionDelete: ActionFunction = async (/*{ params }*/) => {
   try {
     const { data } = await axios.get('/api/v1/users/current-user');
     const role = data[0].role;
@@ -13,7 +13,7 @@ export const actionDelete: ActionFunction = async ({ params }) => {
       toast.error('Need admin permitions');
       return redirect('/dashboard/all-items');
     }
-    await axios.delete(`/api/v1/inventory/${params.id}`);
+    // await axios.delete(`/api/v1/inventory/${params.id}`);
     toast.success('Item Deleted');
     return redirect('/dashboard/all-items');
   } catch (error: any) {
@@ -25,13 +25,15 @@ export const actionDelete: ActionFunction = async ({ params }) => {
 export const DeleteModal = ({ onCancel, equipment_id }: DeleteElementProps) => {
   return (
     <Wrapper>
-      <p>Are you sure you want to delete the item?</p>
-      <Form method='delete' action={`../delete-item/${equipment_id}`}>
-        <button className='btn btn-block form-btn'>submit</button>
-      </Form>
-      <button className='btn btn-block form-btn' onClick={onCancel}>
-        cancel
-      </button>
+      <div className='form modal'>
+        <p>Are you sure you want to delete the item?</p>
+        <Form method='delete' action={`../delete-item/${equipment_id}`}>
+          <button className='btn btn-block form-btn'>submit</button>
+        </Form>
+        <button className='btn btn-block form-btn' onClick={onCancel}>
+          cancel
+        </button>
+      </div>
     </Wrapper>
   );
 };

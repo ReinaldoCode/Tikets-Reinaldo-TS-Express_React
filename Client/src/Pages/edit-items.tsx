@@ -45,7 +45,7 @@ export const actionEdit: ActionFunction = async ({ request, params }) => {
 export const EditItems = () => {
   const data = useLoaderData() as ItemsT;
   const navigatio = useNavigation();
-
+  console.log(data);
   const isSubmitting = navigatio.state === 'submitting';
   return (
     <Wrapper>
@@ -65,17 +65,19 @@ export const EditItems = () => {
             defaultValue={data.location}
           />
 
-          <FormRowSelect
+          <FormRowEdit
+            type='text'
             name='updatedStatus'
             lableText='status'
             defaultValue={data.status}
-            list={Object.values(ITEM_STATUS)}
+            // list={Object.values(ITEM_STATUS)}
           />
-          <FormRowSelect
+          <FormRowEdit
+            type='text'
             name='updatedCondition'
             lableText='condition'
             defaultValue={data.condition}
-            list={Object.values(ITEM_CONDITION)}
+            // list={Object.values(ITEM_CONDITION)}
           />
           <button
             type='submit'

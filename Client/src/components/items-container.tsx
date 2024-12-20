@@ -7,8 +7,24 @@ import { PageBtnContainer } from './page-btn-container';
 
 export const ItmesContainer = () => {
   const { data, filters } = useAllItemsContext() as ItemsType;
-  const { items, pagination } = data;
+  const { items, total } = data;
   const filteredData = filterData(items, filters);
+  const inUser = filterData(items, {
+    search: '',
+    status: 'IN USE',
+    condition: 'ALL',
+  });
+  const inStore = filterData(items, {
+    search: '',
+    status: 'IN STORAGE',
+    condition: 'ALL',
+  });
+  const inDis = filterData(items, {
+    search: '',
+    status: 'DISPOSED',
+    condition: 'ALL',
+  });
+
   if (items.length === 0) {
     return (
       <Wrapper>
@@ -18,9 +34,18 @@ export const ItmesContainer = () => {
   }
   return (
     <Wrapper>
-      <div className='form total'>
+      <div className='total-div'>
         <h5>
-          Total: <span className='total'>{pagination.total}</span>
+          Total: <span className='total'>{filteredData.length} </span>
+        </h5>
+        <h5>
+          In Use: <span className='total'>{inUser.length}</span>
+        </h5>
+        <h5>
+          In Store: <span className='total'>{inStore.length}</span>
+        </h5>
+        <h5>
+          Diposed: <span className='total'>{inDis.length}</span>
         </h5>
       </div>
 
@@ -29,7 +54,7 @@ export const ItmesContainer = () => {
           return <Items key={item.equipment_id} {...item} />;
         })}
       </div>
-      {pagination.pages > 1 && <PageBtnContainer />}
+      {data.page > 1 && <PageBtnContainer />}
     </Wrapper>
   );
 };
