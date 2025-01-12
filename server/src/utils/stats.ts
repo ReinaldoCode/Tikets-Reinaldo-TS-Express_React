@@ -11,3 +11,5 @@ export const expensesByMonth = () => {
   });
   return { year, month } as MonthlyData;
 };
+
+export const expensesByYear = () => {};
