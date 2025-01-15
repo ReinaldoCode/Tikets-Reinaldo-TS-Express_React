@@ -19,6 +19,7 @@ export type Inventory = {
 };
 
 export type UpdateInverntory = {
+  updatedEquipment: string;
   updatedStatus: Status;
   updatedAssigned_to: string;
   updatedLocation: string;

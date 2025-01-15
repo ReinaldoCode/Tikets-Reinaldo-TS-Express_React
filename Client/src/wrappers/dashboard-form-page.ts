@@ -28,6 +28,15 @@ const Wrapper = styled.section`
     margin-top: 1rem;
     display: grid;
     place-items: center;
+    width: 100px;
+  }
+  .cancel-btn {
+    align-self: end;
+    margin-top: 1rem;
+    display: grid;
+    place-items: center;
+    width: 75px;
+    height: 25px;
   }
 
   @media (min-width: 992px) {

@@ -54,6 +54,12 @@ export const EditItems = () => {
         <div className='form-center'>
           <FormRowEdit
             type='text'
+            name='updatedEquipment'
+            lableText='equipment_type'
+            defaultValue={data.equipment_type as string}
+          />
+          <FormRowEdit
+            type='text'
             name='updatedAssigned_to'
             lableText='assigned_to'
             defaultValue={data.assigned_to as string}

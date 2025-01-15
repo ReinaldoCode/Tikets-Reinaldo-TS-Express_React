@@ -1,19 +1,15 @@
 import { IoBarChartSharp } from 'react-icons/io5';
-import { MdAdminPanelSettings, MdQueryStats } from 'react-icons/md';
-import { FaWpforms } from 'react-icons/fa';
+import { MdAdminPanelSettings } from 'react-icons/md';
+import { HiOutlineDesktopComputer } from 'react-icons/hi';
+
 import { ImProfile } from 'react-icons/im';
 import { LinkType } from '../types';
 
 export const links: LinkType[] = [
   {
-    text: 'add item',
+    text: 'IT Equipment',
     path: '.',
-    icon: <FaWpforms />,
-  },
-  {
-    text: 'all item',
-    path: 'all-items',
-    icon: <MdQueryStats />,
+    icon: <HiOutlineDesktopComputer />,
   },
   {
     text: 'stats',

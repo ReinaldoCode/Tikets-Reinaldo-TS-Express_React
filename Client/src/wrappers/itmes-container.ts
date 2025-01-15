@@ -31,6 +31,9 @@ const Wrapper = styled.section`
     padding: 2rem 2.5rem;
     margin: 3rem auto;
   }
+  .add-item {
+    margin: 20px;
+  }
   @media (min-width: 1280px) {
     .jobs {
       grid-template-columns: 1fr 1fr;

@@ -11,6 +11,7 @@ import { ITEM_CONDITION, ITEM_STATUS, LOCATION } from '../utils/content';
 import { FormRow, FormRowSelect } from '../components';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 export const AddItemAction: ActionFunction = async ({ request }) => {
   const fromData = await request.formData();
@@ -23,7 +24,7 @@ export const AddItemAction: ActionFunction = async ({ request }) => {
   } catch (error: any) {
     console.log(error);
     toast.error(error.response.data.msg);
-    return redirect('/dashboard');
+    return redirect('');
   }
 };
 
@@ -96,13 +97,19 @@ export const AddItems = () => {
             defaultValue={ITEM_CONDITION.NEW}
             list={Object.values(ITEM_CONDITION)}
           />
-          <button
-            type='submit'
-            className='btn btn-block form-btn'
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? 'submittiong' : 'submit'}
-          </button>
+          <div className='div-submit-cancel'>
+            {' '}
+            <button
+              type='submit'
+              className='btn btn-block form-btn'
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'submittiong' : 'submit'}
+            </button>
+            <Link to='../' className='btn btn-block cancel-btn'>
+              Cancel
+            </Link>
+          </div>
         </div>
       </Form>
     </Wrapper>

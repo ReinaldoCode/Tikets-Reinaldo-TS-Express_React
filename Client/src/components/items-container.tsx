@@ -4,10 +4,11 @@ import { filterData } from '../utils/filter';
 import Wrapper from '../wrappers/itmes-container';
 import { Items } from './items';
 import { PageBtnContainer } from './page-btn-container';
+import { Link } from 'react-router-dom';
 
 export const ItmesContainer = () => {
   const { data, filters } = useAllItemsContext() as ItemsType;
-  const { items, total } = data;
+  const { items } = data;
   const filteredData = filterData(items, filters);
   const inUser = filterData(items, {
     search: '',
@@ -28,6 +29,9 @@ export const ItmesContainer = () => {
   if (items.length === 0) {
     return (
       <Wrapper>
+        <Link to='../add-item' className='btn add-item'>
+          add item
+        </Link>
         <h2>No Itmes to display</h2>
       </Wrapper>
     );
@@ -48,7 +52,9 @@ export const ItmesContainer = () => {
           Diposed: <span className='total'>{inDis.length}</span>
         </h5>
       </div>
-
+      <Link to='add-item' className='btn add-item'>
+        add item
+      </Link>
       <div className='jobs'>
         {filteredData.map((item: ItemsT) => {
           return <Items key={item.equipment_id} {...item} />;

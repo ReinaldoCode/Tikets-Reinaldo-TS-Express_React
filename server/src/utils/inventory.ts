@@ -57,14 +57,18 @@ export const getUpdateItemData = (
   id: string,
 ) => {
   const {
+    updatedEquipment,
     updatedStatus,
     updatedAssigned_to,
     updatedLocation,
     updatedCondition,
   } = update;
 
-  const { status, assigned_to, location, condition } = item;
+  const { status, assigned_to, location, condition, equipment_type } = item;
   const values = [
+    updatedEquipment === equipment_type || !updatedEquipment
+      ? equipment_type
+      : updatedEquipment,
     updatedStatus === status || !updatedStatus ? status : updatedStatus,
     updatedAssigned_to === assigned_to || !updatedAssigned_to
       ? assigned_to

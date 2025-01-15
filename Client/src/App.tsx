@@ -57,6 +57,11 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
+            element: <AllItems />,
+            loader: loaderAllItmes,
+          },
+          {
+            path: 'add-item',
             element: <AddItems />,
             action: AddItemAction,
           },
@@ -64,11 +69,6 @@ const router = createBrowserRouter([
             path: 'stats',
             element: <Stats />,
             loader: loaderStats,
-          },
-          {
-            path: 'all-items',
-            element: <AllItems />,
-            loader: loaderAllItmes,
           },
           {
             path: 'profile',
